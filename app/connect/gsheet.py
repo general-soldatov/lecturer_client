@@ -4,13 +4,13 @@ from gspread import exceptions
 from time import sleep
 from progress.bar import IncrementalBar
 
-from app.config.configure import DBConfig
+from app.config.configure import google_api
 
 
 class UserSheet:
     def __init__(self, user_id, table="Термех 2/2024"):
         self.user_id = user_id
-        self.gs = gspread.service_account(filename=DBConfig.google_api)
+        self.gs = gspread.service_account(filename=google_api)
         self.table = self.gs.open(table)
         self.rate = self.table.worksheet('rate')
         self.task_head = {
@@ -39,18 +39,26 @@ class UserSheet:
                 }
         return False
 
-    def contingent(self):
-        contingent = self.table.worksheet('contingent')
-        all_rows = contingent.get_all_values()
+    def contingent(self, subject_bot: str = 'termex-bot'):
         data = {}
-        for i, row in enumerate(all_rows[1:], 1):
-            data[row[0]] = {
-                    'google_id': str(i),
-                    'profile': row[1],
-                    'group': f'{row[2]}-{row[3]}',
-                    'var': row[4],
-                    'varD': row[5]
-                }
+        contingent = self.table.worksheet(subject_bot)
+        all_rows = contingent.get_all_values()
+        if subject_bot == 'termex-bot':
+            for i, row in enumerate(all_rows[1:], 1):
+                data[row[0]] = {
+                        'google_id': str(i),
+                        'profile': row[1],
+                        'group': f'{row[2]}-{row[3]}',
+                        'var': row[4],
+                        'varD': row[5]
+                    }
+        elif subject_bot == 'phys-bot':
+            for i, row in enumerate(all_rows[1:], 1):
+                data[row[0]] = {
+                        'google_id': str(i),
+                        'profile': row[1],
+                        'group': f'{row[2]}-{row[3]}'
+                    }
 
         return data
 
