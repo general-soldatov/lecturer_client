@@ -9,8 +9,9 @@ logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
 # BucketManage(bucket_name='termex-bot').schedule()
-BucketClient().contingent(bucket='phys-bot')
+# BucketClient().contingent(bucket='phys-bot')
+# BucketClient().schedule()
 
 
 response = requests.get('https://storage.yandexcloud.net/phys-bot/json/contingent.json')
-print(response.json())
+print(response.json()['Девятаева Виктория Романовна'])
