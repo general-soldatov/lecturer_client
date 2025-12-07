@@ -1,11 +1,10 @@
 import boto3
 import logging
 import json
-import os
 
 import boto3.session
-from app.config.configure import AWSSession, AWSConfig, Configure, Session
 from app.connect.gsheet import UserSheet
+from app.config.configure import AWSSession, AWSConfig, Configure, Session
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -29,3 +28,17 @@ class BucketManage:
         path_bucket = f'{path}/{name}' if path else name
         self.s3.Object(self.bucket_name, path_bucket).put(Body=schedule)
         logger.error(f'File {name} upload to bucket {self.bucket_name}')
+
+
+class BucketClient(BucketManage):
+    def schedule(self, path='json', name='schedule.json'):
+        """Функция конвертации расписания из GoogleSheet в json-формат на бакете Yandex Cloud
+        """
+        data = UserSheet(self.config).shedule()
+        self.json_upload(data, path, name)
+
+    def contingent(self, path='json', name='contingent.json'):
+        """Функция конвертации контингента из GoogleSheet в json-формат на бакете Yandex Cloud
+        """
+        data = UserSheet(self.config).contingent(subject_bot=self.bucket_name)
+        self.json_upload(data, path, name)

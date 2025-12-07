@@ -2,13 +2,11 @@ import re
 from app.connect.gsheet import UserSheet
 from datetime import datetime
 from openpyxl import Workbook, load_workbook
-from app.config.configure import Session, Configure, TicketTemp
+from app.config.configure import Session, Configure
+from app.config.tickets import TicketTemp, TicketOutput
 from pydantic import BaseModel, Field
 from typing import Dict, List
 
-PATH = 'app/config/setting.yaml'
-config = Configure.model_validate_yaml(PATH)
-session = Session.model_construct(config.aws)
 
 file_name = 'contingent.xlsx'
 # data = UserSheet(config)
@@ -45,16 +43,9 @@ class LessonOfWeek(BaseModel):
 # data = LessonOfWeek.model_construct(schedule)
 # print(schedule[str(delimiter)])
 # print(data)
-PROJECT = 'projects/phys.yaml'
-ticket_data = TicketTemp.model_validate_yaml(PROJECT)
-print(ticket_data)
 
-class TicketOutput(BaseModel):
-    year: str
-    discipline: str
-    first: List[str]
-    second: List[str]
-    third: List[str]
+
+
 # wb = load_workbook(file_name)
 
 # ws = wb['Example']

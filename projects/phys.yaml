@@ -1,24 +1,44 @@
 configure:
-  discipline: Физика
-  learn_year: 2025/2026
+  study:
+    discipline: Физика
+    learn_year: 2025/2026
+    department: Кафедра математики и физики
+    faculty: технологии и товароведения
+    direct: 19.03.01 Биотехнология
+    course: '1'
   ticket:
-    first:
+    count: 30
+    category:
+      1:
       - mechanic
       - optics
-    second:
+      2:
       - termodynamick
       - electrical
-    third:
+      3:
       - tasks
 
 question:
   mechanic:
     - dsa
+    - mech
+    - termex
   termodynamick:
     - default_region
+    - vdfds
+    - dss
   electrical:
     - dfgd
+    - sdfd
+    - dwasc
   optics:
     - optics
+    - sknlekfl
+    - lknsdkjv
+    - klcdsl
   tasks:
     - das
+    - cjkdslzmcsd
+    - cdskj,cmka
+    - jnasdk;ad
+    - klcnsdk

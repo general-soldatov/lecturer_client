@@ -78,17 +78,3 @@ class AWSSession:
 # google_api: str = getenv('GOOGLE_SERVICE_ACCOUNT')
 # db_config = AWSConfig(service_name='dynamodb', endpoint_url=getenv('ENDPOINT_DB'))
 # bucket_config = AWSConfig(service_name='s3', endpoint_url=getenv('ENDPOINT_S3'))
-
-class ObjectTicket(BaseModel):
-    first: List[str]
-    second: List[str]
-    third: List[str]
-
-class ConfigTicket(BaseModel):
-    discipline: str
-    learn_year: str
-    ticket: ObjectTicket
-
-class TicketTemp(YamlProject):
-    configure: ConfigTicket
-    question: Dict[str, List[str]]
