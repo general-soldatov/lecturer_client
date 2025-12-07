@@ -1,0 +1,14 @@
+app: code
+aws:
+  endpoints:
+    db: http
+    s3: http
+  default_region: ru-central1
+  key_id: fedljskl2342
+  access_key: dslkmew9i2wqw
+tg_bot:
+  bot_name:
+    address: t.me
+    token: 24423:12fdcss
+google:
+  data_path: /path/super.json

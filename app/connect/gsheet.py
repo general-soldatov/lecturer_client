@@ -4,13 +4,13 @@ from gspread import exceptions
 from time import sleep
 from progress.bar import IncrementalBar
 
-from app.config.configure import google_api
+from app.config.configure import Configure
 
 
 class UserSheet:
-    def __init__(self, user_id, table="Термех 2/2024"):
-        self.user_id = user_id
-        self.gs = gspread.service_account(filename=google_api)
+    def __init__(self, config: Configure, table="Термех 2/2024"):
+        self.user_id = config.telegram_admin
+        self.gs = gspread.service_account(filename=config.google.data_path)
         self.table = self.gs.open(table)
         self.rate = self.table.worksheet('rate')
         self.task_head = {

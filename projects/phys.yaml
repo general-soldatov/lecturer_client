@@ -1,0 +1,24 @@
+configure:
+  discipline: Физика
+  learn_year: 2025/2026
+  ticket:
+    first:
+      - mechanic
+      - optics
+    second:
+      - termodynamick
+      - electrical
+    third:
+      - tasks
+
+question:
+  mechanic:
+    - dsa
+  termodynamick:
+    - default_region
+  electrical:
+    - dfgd
+  optics:
+    - optics
+  tasks:
+    - das
