@@ -2,7 +2,7 @@ import logging
 from app.config.configure import Configure
 from app.config.tickets import TicketTemp, TicketOutput
 from app.connect.bucket import BucketClient
-from app.connect.word import WordTicket
+from app.connect.word import WordTicket, WordQuestion
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -44,11 +44,17 @@ def create_tickets(path: str):
     word = WordTicket(tickets)
     word.create_document()
 
+def create_questions(path: str):
+    ticket_data = TicketTemp.model_validate_yaml(path)
+    word = WordQuestion(ticket_data)
+    word.create_document()
+
 # load_contingent(discipline='physics')
 # load_contingent(discipline='termex')
 # load_shedule()
-create_tickets(path='projects/phys_process_animal.yaml')
-
+PATH = 'projects/phys_spo.yaml'
+create_tickets(PATH)
+# create_questions(PATH)
 
 # response = requests.get('https://storage.yandexcloud.net/phys-bot/json/contingent.json')
 # print(response.json()['Девятаева Виктория Романовна'])

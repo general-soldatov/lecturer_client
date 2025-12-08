@@ -1,6 +1,6 @@
 import jinja2
 from docxtpl import DocxTemplate
-from app.config.tickets import TicketOutput
+from app.config.tickets import TicketOutput, TicketTemp
 
 class WordDocument:
     def __init__(self, path_doc: str = None, path: str = ""):
@@ -34,4 +34,12 @@ class WordTicket(WordDocument):
         super().__init__(path_doc, path)
         self.type_doc = "Билеты"
         self.data = tickets.model_dump()
-        # self.data['faculty'] = self.data['faculty'].upper()
+
+class WordQuestion(WordDocument):
+    def __init__(self, tickets: TicketTemp, path_doc = None, path = "app/config/questions.docx"):
+        super().__init__(path_doc, path)
+        self.type_doc = "Вопросы"
+        self.data = {
+            'questions': tickets.export_question(),
+            **tickets.configure.study
+        }
