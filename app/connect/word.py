@@ -13,7 +13,7 @@ class WordDocument:
 
     def create_name(self):
         path = self.path_doc + "/" if self.path_doc else ""
-        self.name_file = f"{path}{self.type_doc}_{self.data['faculty']}_{self.data['direct']}.docx"
+        self.name_file = f"{path}{self.type_doc.upper()}_{self.data['faculty'].capitalize()}_{self.data['direct']}.docx"
 
     def create_document(self) -> str | Exception:
         self.create_name()
@@ -34,4 +34,4 @@ class WordTicket(WordDocument):
         super().__init__(path_doc, path)
         self.type_doc = "Билеты"
         self.data = tickets.model_dump()
-        self.data['faculty'] = self.data['faculty'].upper()
+        # self.data['faculty'] = self.data['faculty'].upper()

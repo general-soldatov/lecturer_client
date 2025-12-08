@@ -47,7 +47,7 @@ def create_tickets(path: str):
 # load_contingent(discipline='physics')
 # load_contingent(discipline='termex')
 # load_shedule()
-create_tickets(path='projects/phys.yaml')
+create_tickets(path='projects/phys_process_animal.yaml')
 
 
 # response = requests.get('https://storage.yandexcloud.net/phys-bot/json/contingent.json')

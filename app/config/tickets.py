@@ -35,7 +35,7 @@ class TicketOutput(BaseModel):
         count =  ticket_data.configure.ticket.count - len(question)
         if count > 0:
             question.extend((random.choice(question) for _ in range(count)))
-        return question
+        return question[:ticket_data.configure.ticket.count]
 
     @classmethod
     def model_construct(cls, ticket_data: TicketTemp, _fields_set = None, **values):
@@ -46,7 +46,6 @@ class TicketOutput(BaseModel):
         for key, _ in ticket_data.configure.ticket.category.items():
             for i, elem in enumerate(question[key]):
                 data[i][key] = elem
-
         return cls(
             ticket_count=ticket_data.configure.ticket.count,
             questions=data,
