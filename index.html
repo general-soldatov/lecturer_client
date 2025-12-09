@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <!-- <link rel="stylesheet" href="style.css"> -->
+        <style>
+            @page { size: A4; margin: 1cm; }
+            @font-face {
+            font-family: 'Arial';
+            src: url('Arial.ttf') format('truetype');
+            }
+            @font-face {
+                font-family: 'ArialBold';
+                src: url('ARIALBD.ttf') format('truetype');
+            }
+            body {
+                font-family: 'Arial', sans-serif;
+            }
+            /* table, th, td {
+                border: 1px solid black;
+                margin-left: 5px;
+                margin-top: 5px;
+            } */
+            /*table {
+                /* width: auto; ширина таблицы подстраивается под содержимое */
+                /*border-collapse: collapse; /* убираем двойные границы между ячейками
+            }*/
+            h1 {
+                font-family: ArialBold, sans-serif;
+                text-align: center;
+            }
+
+            th {
+                text-align: center; /* выравнивание текста в шапке по центру */
+                background-color: #f2f2f2; /* цвет фона шапки */
+                padding-top: 5px; /* отступы в ячейках шапки */
+                border: 1px solid #ddd; /* граница ячеек шапки */
+                width: 150px;
+                font-weight: 800;
+                font-family: ArialBold;
+            }
+
+            td {
+                padding: 5px; /* отступы в ячейках */
+                border: 1px solid #ddd; /* граница ячеек */
+            }
+            .digit {
+                width: 100px;
+            }
+            .number {
+                width: 30px;
+                padding: 0;
+                padding-top: 5px;
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>Ведомость итогов семестра {{learn_year}} учебного года</h1>
+        <p>Факультет: {{faculty.upper()}}</p>
+        <p>Направление подготовки: {{direct}}</p>
+        <table bordered>
+            <thead>
+                <th class="number">№</th>
+                <th>ФИО обучающегося</th>
+                <th class="digit">Итоговый балл</th>
+                <th>Звёзды</th>
+                <th class="digit">Позиция в рейтинге</th>
+                <th class="digit">Билет</th>
+                <th class="digit">Оценка</th>
+                <th class="digit">Билет пересдача</th>
+                <th class="digit">Оценка пересдачи</th>
+            </thead>
+            <tbody>
+                {% for data in name_data %}
+                <tr>
+                    <td class="number">{{loop.index}}</td>
+                    <td>{{ data }}</td>
+                    <td>{{score_data[loop.index-1]}}</td>
+                    <td>{{stars_data[loop.index-1]}}</td>
+                    <td>{{rate_data[loop.index-1]}}</td>
+                    <td>{{ticket}}</td>
+                    <td>{{ticket}}</td>
+                    <td>{{ticket}}</td>
+                    <td>{{ticket}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </body>
+</html>

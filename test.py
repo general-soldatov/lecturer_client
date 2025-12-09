@@ -6,6 +6,7 @@ from app.config.configure import Session, Configure
 from app.config.tickets import TicketTemp, TicketOutput
 from pydantic import BaseModel, Field
 from typing import Dict, List
+import jinja2
 
 
 file_name = 'contingent.xlsx'
@@ -44,6 +45,9 @@ class LessonOfWeek(BaseModel):
 # print(schedule[str(delimiter)])
 # print(data)
 
+environment = jinja2.Environment()
+template = environment.from_string("Hello, {{ name }}!")
+template.render(name="World")
 
 
 # wb = load_workbook(file_name)

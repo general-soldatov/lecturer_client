@@ -29,6 +29,10 @@ class BucketManage:
         self.s3.Object(self.bucket_name, path_bucket).put(Body=schedule)
         logger.error(f'File {name} upload to bucket {self.bucket_name}')
 
+    def json_download(self, name):
+        pass
+
+
 
 class BucketClient(BucketManage):
     def schedule(self, path='json', name='schedule.json'):
