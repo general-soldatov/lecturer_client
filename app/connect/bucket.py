@@ -1,10 +1,11 @@
 import boto3
 import logging
 import json
-
+import pandas as pd
 import boto3.session
 from app.connect.gsheet import UserSheet
 from app.config.configure import AWSSession, AWSConfig, Configure, Session
+
 
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
@@ -23,14 +24,18 @@ class BucketManage:
         self.bucket_name = bucket_name
         self.temp_path = 'app/temp'
 
+    @staticmethod
+    def path_name(path=None, name='name.json'):
+        return f'{path}/{name}' if path else name
+
     def json_upload(self, data: dict, path=None, name='name.json'):
         schedule = json.dumps(data, ensure_ascii=False, indent=4)
-        path_bucket = f'{path}/{name}' if path else name
-        self.s3.Object(self.bucket_name, path_bucket).put(Body=schedule)
+        self.s3.Object(self.bucket_name, self.path_name(path, name)).put(Body=schedule)
         logger.error(f'File {name} upload to bucket {self.bucket_name}')
 
-    def json_download(self, name):
-        pass
+    def json_download(self, path, filename):
+        get_object_response = self.s3.Object(self.bucket_name, self.path_name(path, filename)).get()
+        return json.loads(get_object_response['Body'].read())
 
 
 

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="app/static/style.css">
+
+    </head>
+    <body>
+        <h1>Ведомость итогов семестра {{learn_year}} учебного года</h1>
+        <p>Дисциплина: {{discipline.upper()}}</p>
+        <p>Факультет: {{faculty.upper()}}</p>
+        <p>Направление подготовки: {{direct.upper()}}</p>
+        <table bordered>
+            <thead>
+                <th class="number">№</th>
+                <th>ФИО обучающегося</th>
+                <th class="digit">Итоговый балл</th>
+                <th style="width: 100;">Звёзды</th>
+                <th class="digit">Позиция в рейтинге</th>
+                <th class="digit">Билет</th>
+                <th class="digit">Оценка</th>
+                <th class="digit">Билет пересдача</th>
+                <th class="digit">Оценка пересдачи</th>
+            </thead>
+            <tbody>
+                {% for data in name %}
+                <tr>
+                    <td class="number">{{loop.index}}</td>
+                    <td>{{ data }}</td>
+                    <td>{{score[loop.index-1]}}</td>
+                    <td>
+                        {% for row in range(stars[loop.index-1]) %}
+                            <img class="star" src="app/static/star_orange.png" alt="">{% endfor %}
+                        {% for row in range(5-stars[loop.index-1]) %}
+                            <img class="star" src="app/static/star_white.png" alt="">{% endfor %}
+                    </td>
+                    <td>{{rate[loop.index-1]}}</td>
+                    <td>{{ticket}}</td>
+                    <td>{{ticket}}</td>
+                    <td>{{ticket}}</td>
+                    <td>{{ticket}}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+    </body>
+</html>
