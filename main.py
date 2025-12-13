@@ -2,7 +2,7 @@ import logging
 from app.config.configure import Configure
 from app.config.tickets import TicketTemp, TicketOutput
 from app.connect.bucket import BucketClient
-from app.connect.word import WordTicket, WordQuestion
+from app.documents.word import WordTicket, WordQuestion
 from app.documents.rate import RateCreator
 
 logger = logging.getLogger(__name__)
@@ -41,13 +41,12 @@ def create_tickets(path: str):
     """
     ticket_data = TicketTemp.model_validate_yaml(path)
     tickets = TicketOutput.model_construct(ticket_data)
-    # print(tickets)
-    word = WordTicket(tickets)
+    word = WordTicket(tickets, path_folder="export")
     word.create_document()
 
 def create_questions(path: str):
     ticket_data = TicketTemp.model_validate_yaml(path)
-    word = WordQuestion(ticket_data)
+    word = WordQuestion(ticket_data, path_folder="export")
     word.create_document()
 
 def create_summary(discipline):
@@ -59,9 +58,9 @@ def create_summary(discipline):
 # load_contingent(discipline='physics')
 # load_contingent(discipline='termex')
 # load_shedule()
-# PATH = 'projects/phys_spo.yaml'
+PATH = "projects/phys_spo.yaml"
 # create_tickets(PATH)
-# create_questions(PATH)
-create_summary(discipline='physics')
+create_questions(PATH)
+# create_summary(discipline='physics')
 # response = requests.get('https://storage.yandexcloud.net/phys-bot/json/contingent.json')
 # print(response.json()['Девятаева Виктория Романовна'])
