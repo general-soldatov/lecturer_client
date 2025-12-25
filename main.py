@@ -5,12 +5,26 @@ from app.connect.bucket import BucketClient
 from app.documents.word import WordTicket, WordQuestion
 from app.documents.rate import RateCreator
 
+logging.basicConfig(
+    level=logging.INFO,
+    format='[{asctime}] #{levelname:8} {filename}:'
+           '{lineno} - {name} - {message}',
+    style='{'
+)
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
+
+def logger_set(func):
+    def inner(*args, **kwargs):
+        try:
+            func(*args, **kwargs)
+        except Exception as e:
+            logger.error(e)
+    return inner
 
 PATH = 'app/config/setting.yaml'
 config: Configure = Configure.model_validate_yaml(PATH)
 
+@logger_set
 def load_shedule():
     """
     Docstring для load_shedule
@@ -44,11 +58,13 @@ def create_tickets(path: str):
     word = WordTicket(tickets, path_folder="export")
     word.create_document()
 
+@logger_set
 def create_questions(path: str):
     ticket_data = TicketTemp.model_validate_yaml(path)
     word = WordQuestion(ticket_data, path_folder="export")
     word.create_document()
 
+@logger_set
 def create_summary(discipline):
     data = RateCreator(
         config.discipline[discipline].bucket_name, config=config,
@@ -58,9 +74,10 @@ def create_summary(discipline):
 # load_contingent(discipline='physics')
 # load_contingent(discipline='termex')
 # load_shedule()
-PATH = "projects/phys_spo.yaml"
+# PATH = "projects/phys_spo.yaml"
 # create_tickets(PATH)
-create_questions(PATH)
+# create_questions(PATH)
 # create_summary(discipline='physics')
+from app.connect.elib import *
 # response = requests.get('https://storage.yandexcloud.net/phys-bot/json/contingent.json')
 # print(response.json()['Девятаева Виктория Романовна'])

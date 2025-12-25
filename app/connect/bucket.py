@@ -6,9 +6,7 @@ import boto3.session
 from app.connect.gsheet import UserSheet
 from app.config.configure import AWSSession, AWSConfig, Configure, Session
 
-
 logger = logging.getLogger(__name__)
-logger.setLevel(logging.INFO)
 
 class BucketManage:
     def __init__(self, bucket_name: str, config: AWSConfig | dict | Configure, session_aws: AWSSession | dict = None):
@@ -20,9 +18,16 @@ class BucketManage:
             session_aws = Session.model_construct(config.aws).model_dump()
             configure = AWSConfig.model_construct_s3(config).model_dump()
             self.config = config
-        self.s3 = boto3.session.Session(**session_aws).resource(**configure)
+        self.s3 = self.connect_to_boto(session_aws, configure)
         self.bucket_name = bucket_name
         self.temp_path = 'app/temp'
+
+    @staticmethod
+    def connect_to_boto(session_aws: dict, configure: dict):
+        try:
+            return boto3.session.Session(**session_aws).resource(**configure)
+        except Exception as err:
+            logger.error(err)
 
     @staticmethod
     def path_name(path=None, name='name.json'):
@@ -31,11 +36,14 @@ class BucketManage:
     def json_upload(self, data: dict, path=None, name='name.json'):
         schedule = json.dumps(data, ensure_ascii=False, indent=4)
         self.s3.Object(self.bucket_name, self.path_name(path, name)).put(Body=schedule)
-        logger.error(f'File {name} upload to bucket {self.bucket_name}')
+        logger.info(f'File {name} upload to bucket {self.bucket_name}')
 
     def json_download(self, path, filename):
-        get_object_response = self.s3.Object(self.bucket_name, self.path_name(path, filename)).get()
-        return json.loads(get_object_response['Body'].read())
+        try:
+            get_object_response = self.s3.Object(self.bucket_name, self.path_name(path, filename)).get()
+            return json.loads(get_object_response['Body'].read())
+        except Exception as e:
+            logger.error(e)
 
 
 
