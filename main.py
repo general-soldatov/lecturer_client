@@ -1,9 +1,16 @@
 import logging
+import click
+import shutil
 from app.config.configure import Configure
 from app.config.tickets import TicketTemp, TicketOutput
 from app.connect.bucket import BucketClient
 from app.documents.word import WordTicket, WordQuestion
 from app.documents.rate import RateCreator
+from app.documents.patent import project
+
+@click.group()
+def cli():
+    pass
 
 logging.basicConfig(
     level=logging.INFO,
@@ -21,63 +28,103 @@ def logger_set(func):
             logger.error(e)
     return inner
 
-PATH = 'app/config/setting.yaml'
+PATH = 'C:/Users/Юрий Солдатов/PycharmProjects/lecturer_client/app/config/setting.yaml'
 config: Configure = Configure.model_validate_yaml(PATH)
 
+@cli.command("create", help="Create template of makefile")
+@click.option("--type", prompt="Type of file", type=click.Choice(["patent", "ticket"]))
+@click.option("--name", prompt="Name of file")
 @logger_set
-def load_shedule():
+def create(type: str, name: str):
+    data = {
+        "patent": "C:/Users/Юрий Солдатов/PycharmProjects/lecturer_client/app/documents/template_make/patent.yaml",
+        "ticket": "C:/Users/Юрий Солдатов/PycharmProjects/lecturer_client/app/documents/template_make/phys_biotech.yaml"
+    }
+    name += ".yaml"
+    shutil.copy(data[type], name)
+    click.echo(f"File {type}: {name} create successful!")
+
+@cli.command("upload", help="Upload schedule to bucket")
+@click.option("--doc", "-d", prompt="Document", type=click.Choice(["schedule", "contingent"]))
+@click.option("--subject", prompt="Subject", type=click.Choice(["termex", "physics"]))
+@logger_set
+def upload(doc: str, subject: str):
     """
     Docstring для load_shedule
-    This function is loading shedule at json-format to termex-bucket
-    """
-    name = config.discipline['termex']
-    s3 = BucketClient(name.bucket_name, config=config)
-    s3.schedule()
+    This function is loading shedule at json-format to termex-bucket or loading contingent at json-format to bucket
 
-def load_contingent(discipline: str):
-    """
-    Docstring для load_contingent
-    This function is loading contingent at json-format to bucket
-
+    :param doc: Type of document to load
+    :type doc: str
     :param discipline: Name of discipline as physics or termex
     :type discipline: str
     """
-    s3 = BucketClient(
-        config.discipline[discipline].bucket_name, config=config)
-    s3.contingent()
+    if doc == "schedule":
+        name = config.discipline['termex']
+        s3 = BucketClient(name.bucket_name, config=config)
+        s3.schedule()
+    elif doc == "contingent":
+        s3 = BucketClient(
+        config.discipline[subject].bucket_name, config=config)
+        s3.contingent()
 
-def create_tickets(path: str):
+@cli.command("learn", help="Build learn's documents from makefiles")
+@click.option("--types", prompt="Type", type=click.Choice(["tickets", "questions", "summary"]))
+@click.option("--path", prompt="Path", help="Check path to makefile")
+@click.option("--subject", prompt="Subject", type=click.Choice(["termex", "physics"]))
+@logger_set
+def create_tickets(types: str, path: str, subject: str):
     """
     Docstring для create_tickets
 
     :param path: Path to yaml-project
     :type path: str
     """
-    ticket_data = TicketTemp.model_validate_yaml(path)
-    tickets = TicketOutput.model_construct(ticket_data)
-    word = WordTicket(tickets, path_folder="export")
-    word.create_document()
+    match types:
+        case "summary":
+            data = RateCreator(
+            config.discipline[subject].bucket_name, config=config,
+            path_yaml=path)
+            data.create_pdf()
+        case "tickets":
+            ticket_data = TicketTemp.model_validate_yaml(path)
+            tickets = TicketOutput.model_construct(ticket_data)
+            word = WordTicket(tickets, path_folder="export")
+            word.create_document()
+        case "questions":
+            ticket_data = TicketTemp.model_validate_yaml(path)
+            word = WordQuestion(ticket_data, path_folder="export")
+            word.create_document()
 
+@cli.command("patent", help="Build documents from makefiles")
+@click.option("--path", prompt="Path", help="Check path to makefile")
 @logger_set
-def create_questions(path: str):
-    ticket_data = TicketTemp.model_validate_yaml(path)
-    word = WordQuestion(ticket_data, path_folder="export")
-    word.create_document()
+def patent(path: str):
+    project(path)
 
-@logger_set
-def create_summary(discipline):
-    data = RateCreator(
-        config.discipline[discipline].bucket_name, config=config,
-        path_yaml="projects/summary.yaml")
-    data.create_pdf()
+# @logger_set
+# def create_questions(path: str):
+#     ticket_data = TicketTemp.model_validate_yaml(path)
+#     word = WordQuestion(ticket_data, path_folder="export")
+#     word.create_document()
+
+# @logger_set
+# def create_summary(discipline):
+#     data = RateCreator(
+#         config.discipline[discipline].bucket_name, config=config,
+#         path_yaml="projects/summary.yaml")
+#     data.create_pdf()
 
 # load_contingent(discipline='physics')
 # load_contingent(discipline='termex')
 # load_shedule()
-# PATH = "projects/phys_spo.yaml"
+# PATH = "projects/phys_ntts_remote_quick.yaml"
 # create_tickets(PATH)
 # create_questions(PATH)
 # create_summary(discipline='physics')
-from app.connect.elib import *
-# response = requests.get('https://storage.yandexcloud.net/phys-bot/json/contingent.json')
-# print(response.json()['Девятаева Виктория Романовна'])
+# from app.connect.elib import *
+
+# import requests
+# response = requests.get('https://storage.yandexcloud.net/termex-bot/json/contingent.json')
+# print(response.json()['Ковальчук Фёдор Сергеевич'])
+if __name__ == '__main__':
+    cli()

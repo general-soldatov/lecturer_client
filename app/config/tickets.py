@@ -47,6 +47,7 @@ class TicketOutput(BaseModel):
     def model_construct(cls, ticket_data: TicketTemp, _fields_set = None, **values):
         data: List[Dict[int, str]] = [{key: key for key in ticket_data.configure.ticket.category.keys()}
                                       for _ in range(ticket_data.configure.ticket.count)]
+
         if ticket_data.configure.ticket.category[1] == ticket_data.configure.ticket.category[2]:
             count_question = ticket_data.configure.ticket.count * 2
             list_of_questions = cls.question_to_list(ticket_data, 1, count_question)
@@ -56,7 +57,7 @@ class TicketOutput(BaseModel):
                 3: cls.question_to_list(ticket_data, 3, ticket_data.configure.ticket.count)
             }
         else:
-            question = {key: cls.question_to_list(ticket_data, key)
+            question = {key: cls.question_to_list(ticket_data, key, ticket_data.configure.ticket.count)
                         for key, _ in ticket_data.configure.ticket.category.items()}
         for key, _ in ticket_data.configure.ticket.category.items():
             for i, elem in enumerate(question[key]):

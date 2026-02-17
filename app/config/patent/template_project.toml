@@ -1,0 +1,15 @@
+[copyriht_info]
+copyright_holder = "Федеральное государственное бюджетное образовательное учреждение высшего образования «Воронежский государственный аграрный университет имени императора Петра I»"
+copyright_adress = "394087, РФ, г. Воронеж, ул. Мичурина, 1"
+copiright_ogrn = "1033600074090"
+copyright_inn = "3666031208"
+citizenship = "РФ"
+short_description = "Разработка модели, алгоритма, написание и развертывание программы."
+copyright_position = "И.о. проректора по научной работе ФГБОУ ВО Воронежский ГАУ"
+copyright_name = "С.Н. Семенов"
+
+[template_data_project]
+type_of_computer = "ПК на базе процессора не ниже Pentium 2,3 ГГц."
+operation_system = "Microsoft Windows 7, 8.1, 10, 11."
+program_language = "Python"
+size_of_program = "744 кб"

@@ -45,9 +45,9 @@ class LessonOfWeek(BaseModel):
 # print(schedule[str(delimiter)])
 # print(data)
 
-environment = jinja2.Environment()
-template = environment.from_string("Hello, {{ name }}!")
-template.render(name="World")
+# environment = jinja2.Environment()
+# template = environment.from_string("Hello, {{ name }}!")
+# template.render(name="World")
 
 
 # wb = load_workbook(file_name)

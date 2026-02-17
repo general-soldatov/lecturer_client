@@ -1,0 +1,44 @@
+info_program:
+  name_of_prog: Программа вывода задач теоретического задачника
+  abstract: Представленная программа может быть использована.
+  type_of_computer: ПК на базе процессора не ниже Pentium 2,3 ГГц.
+  operation_system: Microsoft Windows 7, 8.1, 10, 11.
+  program_language: Python
+  size_of_program: 650 кб
+  path_text: /load/main.py
+  program_text: ""
+  count_list: 6
+
+info_authors:
+  author_1:
+    first_name: Солдатов
+    name: Юрий
+    last_name: Игоревич
+    date_of_birth: 1997-02-19
+    full_address: Воронеж, ул.Куражная, д. 13
+    passport_series: 1111
+    passport_number: 123456
+    pasport_organisation: ОУФМС Воронежа по Рождественскому району
+    pasport_date: "2015-01-13"
+    citizenship: "РФ"
+
+  author_2:
+    first_name: Фамилия
+    name: Имя
+    last_name: Отчество
+    date_of_birth: 1949-02-11
+    full_address: Адрес автора
+    passport_series: 1111
+    passport_number: 123456
+    pasport_organisation: ОУФМС Воронежа по Рождественскому району
+    pasport_date: "2015-01-13"
+    citizenship: "РФ"
+
+copyright_info:
+  copyright_holder: Федеральное государственное бюджетное образовательное учреждение высшего образования «Воронежский государственный аграрный университет имени императора Петра I»
+  copyright_adress: 394087, РФ, г. Воронеж, ул. Мичурина, 1
+  copiright_ogrn: 1033600074090
+  copyright_inn: 3666031208
+  short_description: Разработка модели, алгоритма, написание и развертывание программы.
+  copyright_position: И.о. проректора по научной работе ФГБОУ ВО Воронежский ГАУ
+  copyright_name: С.Н. Семенов

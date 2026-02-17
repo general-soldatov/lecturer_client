@@ -8,7 +8,7 @@ from app.config.configure import Configure
 
 
 class UserSheet:
-    def __init__(self, config: Configure, table="Термех 2/2024"):
+    def __init__(self, config: Configure, table="Термех 2/2026"):
         self.user_id = config.telegram_admin
         self.gs = gspread.service_account(filename=config.google.data_path)
         self.table = self.gs.open(table)

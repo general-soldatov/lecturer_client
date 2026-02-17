@@ -1,0 +1,29 @@
+[form_decoder_copyright]
+copyright_holder =  "Правообладатель"
+copiright_ogrn = "ОГРН"
+copyright_inn = "ИНН"
+citizenship = "Гражданство"
+short_description = "Краткое описание творческого вклада автора"
+copyright_position = "Представитель правообладателя"
+copyright_name = "И.О. Фамилия представителя"
+
+[form_decoder_project]
+name_of_prog = "Название программы"
+abstract =  "Аннотация"
+type_of_computer = "Тип компьютера"
+operation_system = "Тип ОС"
+program_language = "Язык программирования"
+size_of_program = "Размер программы"
+
+[form_decoder_author]
+full_name = "ФИО автора"
+first_name = "Фамилия"
+name = "Имя"
+last_name = "Отчество"
+date_of_birth = "Дата рождения"
+full_address = "Адрес автора"
+passport_data = "Паспортные данные"
+passport_series = "Серия"
+passport_number = "Номер"
+pasport_organisation = "Кем выдан"
+pasport_date = "Дата выдачи"
