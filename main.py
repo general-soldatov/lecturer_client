@@ -44,7 +44,7 @@ def create(type: str, name: str):
     shutil.copy(data[type], name)
     click.echo(f"File {type}: {name} create successful!")
 
-@cli.command("upload", help="Upload schedule to bucket")
+@cli.command("upload", help="Upload schedule or contingent to bucket")
 @click.option("--doc", "-d", prompt="Document", type=click.Choice(["schedule", "contingent"]))
 @click.option("--subject", prompt="Subject", type=click.Choice(["termex", "physics"]))
 @logger_set
@@ -97,22 +97,11 @@ def create_tickets(types: str, path: str, subject: str):
 
 @cli.command("patent", help="Build documents from makefiles")
 @click.option("--path", prompt="Path", help="Check path to makefile")
+@click.option("--folder", prompt="Folder", help="Check folder to output", default="export")
 @logger_set
-def patent(path: str):
-    project(path)
+def patent(path: str, folder: str):
+    project(path, folder)
 
-# @logger_set
-# def create_questions(path: str):
-#     ticket_data = TicketTemp.model_validate_yaml(path)
-#     word = WordQuestion(ticket_data, path_folder="export")
-#     word.create_document()
-
-# @logger_set
-# def create_summary(discipline):
-#     data = RateCreator(
-#         config.discipline[discipline].bucket_name, config=config,
-#         path_yaml="projects/summary.yaml")
-#     data.create_pdf()
 
 # load_contingent(discipline='physics')
 # load_contingent(discipline='termex')

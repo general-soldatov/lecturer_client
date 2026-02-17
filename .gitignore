@@ -5,3 +5,6 @@ termex-bot-0ea77baf201b.json
 setting.yaml
 /__pycache__/
 /template_patent/
+build.bat
+/build/
+/dist/

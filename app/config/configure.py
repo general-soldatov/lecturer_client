@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-# from dotenv import load_dotenv
 from os import getenv
 from pydantic import BaseModel, Field
 import yaml
