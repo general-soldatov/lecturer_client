@@ -8,3 +8,4 @@ setting.yaml
 build.bat
 /build/
 /dist/
+users.json

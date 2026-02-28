@@ -1,12 +1,15 @@
 import logging
 import click
 import shutil
+import json
 from app.config.configure import Configure
 from app.config.tickets import TicketTemp, TicketOutput
 from app.connect.bucket import BucketClient
+from app.connect.db import load_contingent, order, UserVar
 from app.documents.word import WordTicket, WordQuestion
 from app.documents.rate import RateCreator
 from app.documents.patent import project
+
 
 @click.group()
 def cli():
@@ -102,15 +105,26 @@ def create_tickets(types: str, path: str, subject: str):
 def patent(path: str, folder: str):
     project(path, folder)
 
+@cli.command("download", help="Download contingent from database")
+@click.option("--subject", prompt="Subject", type=click.Choice(["termex", "phys"]))
+@click.option("--year", prompt="Year of learning")
+@logger_set
+def download(subject: str, year: str):
+    load_contingent(subject, year)
 
-# load_contingent(discipline='physics')
-# load_contingent(discipline='termex')
-# load_shedule()
-# PATH = "projects/phys_ntts_remote_quick.yaml"
-# create_tickets(PATH)
-# create_questions(PATH)
-# create_summary(discipline='physics')
-# from app.connect.elib import *
+@cli.command("clean_up", help="Clean up of contingent")
+@click.option("--subject", prompt="Subject", type=click.Choice(["termex", "phys"]))
+@click.option("--path", prompt="Path to contingent")
+@logger_set
+def clean_up(subject: str, path: str):
+    data = order(subject, path)
+    uv = UserVar(subject)
+    for item in data:
+        if click.confirm(f"Are you want delete from database user {item['name']}", default=True):
+            res = uv.delete_note(int(item['user_id']))
+            click.echo(f"User {item['name']} was deleted!")
+            print('Data:', res)
+
 
 # import requests
 # response = requests.get('https://storage.yandexcloud.net/termex-bot/json/contingent.json')

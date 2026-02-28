@@ -1,42 +1,42 @@
-import re
-from app.connect.gsheet import UserSheet
-from datetime import datetime
-from openpyxl import Workbook, load_workbook
-from app.config.configure import Session, Configure
-from app.config.tickets import TicketTemp, TicketOutput
-from pydantic import BaseModel, Field
-from typing import Dict, List
-import jinja2
+# import re
+# from app.connect.gsheet import UserSheet
+# from datetime import datetime
+# from openpyxl import Workbook, load_workbook
+# from app.config.configure import Session, Configure
+# from app.config.tickets import TicketTemp, TicketOutput
+# from pydantic import BaseModel, Field
+# from typing import Dict, List
+# import jinja2
 
 
-file_name = 'contingent.xlsx'
-# data = UserSheet(config)
+# file_name = 'contingent.xlsx'
+# # data = UserSheet(config)
 
-delimiter = datetime(2025, 1, 1).isocalendar()[1]
-delimiter %= 2
+# delimiter = datetime(2025, 1, 1).isocalendar()[1]
+# delimiter %= 2
 
-class Lesson(BaseModel):
-    time: str
-    data: str
+# class Lesson(BaseModel):
+#     time: str
+#     data: str
 
-class LessonOfWeek(BaseModel):
-    second: Dict[str, List[Lesson]] = Field(alias='0')
-    first: Dict[str, List[Lesson]] = Field(alias='1')
+# class LessonOfWeek(BaseModel):
+#     second: Dict[str, List[Lesson]] = Field(alias='0')
+#     first: Dict[str, List[Lesson]] = Field(alias='1')
 
-    @staticmethod
-    def reconstruct_model(data: Dict[str, Dict[str, Dict[str, str]]]):
-        obj = {}
-        for week, days in data.items():
-            obj.setdefault(week, {})
-            for day, shed in days.items():
-                obj[week].setdefault(day, [])
-                obj[week][day] = [{'time': times, 'data': lesson} for times, lesson in shed.items()]
-        return obj
+#     @staticmethod
+#     def reconstruct_model(data: Dict[str, Dict[str, Dict[str, str]]]):
+#         obj = {}
+#         for week, days in data.items():
+#             obj.setdefault(week, {})
+#             for day, shed in days.items():
+#                 obj[week].setdefault(day, [])
+#                 obj[week][day] = [{'time': times, 'data': lesson} for times, lesson in shed.items()]
+#         return obj
 
-    @classmethod
-    def model_construct(cls, data: Dict[str, Dict[str, Dict[str, str]]], _fields_set = None, **values):
-        obj = cls.reconstruct_model(data)
-        return cls.model_validate(obj)
+#     @classmethod
+#     def model_construct(cls, data: Dict[str, Dict[str, Dict[str, str]]], _fields_set = None, **values):
+#         obj = cls.reconstruct_model(data)
+#         return cls.model_validate(obj)
 
 # schedule = data.shedule()
 # contingent = data.contingent(subject_bot='phys-bot')
@@ -88,3 +88,29 @@ class LessonOfWeek(BaseModel):
 # print(dat)
 # print('success')
 # # print(chr(col))
+
+import json
+from app.connect.db import UserVar
+import requests
+
+
+# uv = UserVar()
+
+# data = uv.input_users()
+
+# with open('users.json', 'w', encoding='utf-8') as file:
+#     json.dump(data, file, ensure_ascii=False, indent=4, default=str)
+
+
+
+# with open('to_delete.json', 'w', encoding='utf-8') as file:
+#     json.dump(order_data, file, ensure_ascii=False, indent=4)
+
+# with open('to_delete.json', 'r', encoding='utf-8') as file:
+#     to_delete = json.load(file)
+
+# for item in to_delete:
+#     res = uv.delete_note(int(item['user_id']))
+#     print('Delete:', item['name'], 'Data:', res)
+
+# load_contingent('termex', 2025)
