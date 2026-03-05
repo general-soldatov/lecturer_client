@@ -9,15 +9,21 @@ from app.config.configure import Configure
 
 class UserSheet:
     def __init__(self, config: Configure, table="Термех 2/2026"):
+        self.bar = IncrementalBar("Open GoogleSheet", max = 10, suffix='%(percent)d%%')
         self.user_id = config.telegram_admin
+        # self.bar.next()
         self.gs = gspread.service_account(filename=config.google.data_path)
+        self.bar.next(4)
         self.table = self.gs.open(table)
+        self.bar.next(3)
         self.rate = self.table.worksheet('rate')
         self.task_head = {
             'S1': 'E', 'S2': 'F', 'S3': 'G', 'S4': 'H', 'S5': 'I', 'S6': 'J',
             'K1': 'K', 'K2': 'L', 'K3': 'M', 'K4': 'N', 'K5': 'O',
             'D1': 'P', 'D2': 'Q', 'D3': 'R', 'D4': 'S', 'D5': 'T', 'D6': 'U'
             }
+        self.bar.next(3)
+        self.bar.finish()
 
     def user_search(self, name):
         contingent = self.table.worksheet('contingent')
@@ -40,9 +46,12 @@ class UserSheet:
         return False
 
     def contingent(self, subject_bot: str = 'termex-bot'):
+        print()
         data = {}
         contingent = self.table.worksheet(subject_bot)
         all_rows = contingent.get_all_values()
+        bar = IncrementalBar("Create contingent", max = len(all_rows), suffix='%(percent)d%%')
+        bar.next()
         if subject_bot == 'termex-bot':
             for i, row in enumerate(all_rows[1:], 1):
                 data[row[0]] = {
@@ -52,6 +61,7 @@ class UserSheet:
                         'var': row[4],
                         'varD': row[5]
                     }
+                bar.next()
         elif subject_bot == 'phys-bot':
             for i, row in enumerate(all_rows[1:], 1):
                 data[row[0]] = {
@@ -59,7 +69,8 @@ class UserSheet:
                         'profile': row[1],
                         'group': f'{row[2]}-{row[3]}'
                     }
-
+                bar.next()
+        bar.finish()
         return data
 
     def user_info(self, google_id):
@@ -72,12 +83,14 @@ class UserSheet:
         self.rate.update_acell(f'{word}{google_id}', ball)
         return 'ok'
 
-    def shedule(self):
+    def schedule(self):
+        print()
         shedule = self.table.worksheet('shedule')
         lst = shedule.get_all_values()
-
+        bar = IncrementalBar("Create schedule", max = len(lst), suffix='%(percent)d%%')
         days = lst[0][1:]
         schedule = lst[1:]
+        bar.next()
         data = {
             '0': {},
             '1': {}
@@ -92,7 +105,8 @@ class UserSheet:
                 if disc == '':
                     continue
                 data[str(i%2)][days[j]].update({tms[0]: disc.replace('\n', ' ').replace('  ', ' ')})
-
+                bar.next()
+        bar.finish()
         return data
 
 

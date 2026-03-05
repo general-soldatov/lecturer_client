@@ -1,8 +1,12 @@
 import boto3
 import logging
 import json
-import pandas as pd
 import boto3.session
+from progress.bar import IncrementalBar
+from os import getenv
+from todoist_api_python.api import TodoistAPI
+from datetime import datetime, timedelta
+from typing import Dict
 from app.connect.gsheet import UserSheet
 from app.config.configure import AWSSession, AWSConfig, Configure, Session
 
@@ -44,18 +48,63 @@ class BucketManage:
             return json.loads(get_object_response['Body'].read())
         except Exception as e:
             logger.error(e)
+            return {}
 
 
 
 class BucketClient(BucketManage):
-    def schedule(self, path='json', name='schedule.json'):
+    def __init__(self, bucket_name, config, session_aws = None):
+        super().__init__(bucket_name, config, session_aws)
+        self.td = TodoistAPI(getenv('TODOIST'))
+
+    def schedule(self, path='json', name='schedule.json', todo="to-do.json"):
         """Функция конвертации расписания из GoogleSheet в json-формат на бакете Yandex Cloud
         """
-        data = UserSheet(self.config).shedule()
+        data = UserSheet(self.config).schedule()
+        self.bar = IncrementalBar("Upload shedule", max = 7, suffix='%(percent)d%%')
         self.json_upload(data, path, name)
+        self.bar.next(2)
+        self.td_list: dict = self.json_download(path, todo)
+        self.bar.next(2)
+        self._del_tasks()
+        self.bar.finish()
+        self.add_todoist(data)
+        self.json_upload(self.td_list, path, todo)
+
+
+    def _del_tasks(self):
+        for task in self.td_list['tasks']:
+            self.td.delete_task(task)
+        self.td_list['tasks'].clear()
+        self.bar.next(3)
 
     def contingent(self, path='json', name='contingent.json'):
         """Функция конвертации контингента из GoogleSheet в json-формат на бакете Yandex Cloud
         """
         data = UserSheet(self.config).contingent(subject_bot=self.bucket_name)
         self.json_upload(data, path, name)
+
+    def add_todoist(self, schedule: Dict[str, Dict[str, Dict[str, str]]]):
+        now = datetime.now()
+        start = now - timedelta(days=now.weekday())
+        print("Upload shedule to")
+        for i in range(2):
+            day = start + timedelta(days=i * 7)
+            delimiter = (day.isocalendar().week + 1) % 2
+            info = schedule[str(delimiter)].values()
+            bar = IncrementalBar(f"{2 - delimiter} week",
+                                 max = len(info), suffix='%(percent)d%%')
+            for j, today in enumerate(info):
+                day_to = day + timedelta(days=j)
+                for key, value in today.items():
+                    time = key.replace('.', ':') .split(sep='-')
+                    text = f"{value} до {time[1]}"
+                    hour, minute = map(int, time[0].split(sep=':'))
+                    day_to = day_to.replace(hour=hour, minute=minute)
+                    task = self.td.add_task(text,
+                                            project_id=self.td_list['projects']['vsau'],
+                        due_string='every 2 week',
+                        due_datetime=day_to)
+                    self.td_list['tasks'].append(task.id)
+                bar.next()
+            bar.finish()
