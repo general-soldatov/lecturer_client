@@ -1,7 +1,10 @@
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'C:/Users/Юрий Солдатов/PycharmProjects/lecturer_client')))
+
 import logging
 import click
 import shutil
-import json
 from app.config.configure import Configure
 from app.config.tickets import TicketTemp, TicketOutput
 from app.connect.bucket import BucketClient
@@ -9,6 +12,7 @@ from app.connect.db import load_contingent, order, UserVar
 from app.documents.word import WordTicket, WordQuestion
 from app.documents.rate import RateCreator
 from app.documents.patent import project
+from app.documents.kettlebell import KettlebellCompetition
 
 
 @click.group()
@@ -125,6 +129,37 @@ def clean_up(subject: str, path: str):
             click.echo(f"User {item['name']} was deleted!")
             print('Data:', res)
 
+@cli.group()
+def kettlebell():
+    pass
+
+@kettlebell.command("flow", help="Create flow of members")
+@click.option("--path", prompt="Path to contingent")
+@click.option("--gender", prompt="Gender", help="Check gender, who started", type=click.Choice(["male", "female", "none"]))
+@click.option("--platform", prompt="Platform", help="Enter count of platform", default="6")
+@logger_set
+def flow(path: str, gender: str, platform: str):
+    genders = dict(male='М', female='Ж', none=None)
+    contest = KettlebellCompetition(path)
+    contest.create_flow(genders[gender], int(platform))
+
+@kettlebell.command("summary", help="Create summary of contest's members")
+@click.option("--path", prompt="Path to contingent")
+@click.option("--gender", prompt="Gender", help="Check gender, who ended performance", type=click.Choice(["male", "female", "none"]))
+@click.option("--category", prompt="Category", help="Enter category, who ended performance", default=None)
+@logger_set
+def summary(path: str, gender: str, category: str | None):
+    genders = dict(male='М', female='Ж', none=None)
+    contest = KettlebellCompetition(path)
+    contest.create_protocol(genders[gender], f'{category} кг')
+
+@kettlebell.command("commands", help="Create summary of contest's members")
+@click.option("--path", prompt="Path to contingent")
+@click.option("--name", prompt="Name", help="Enter name files", default="summary")
+@logger_set
+def commands(path: str, name: str):
+    contest = KettlebellCompetition(path)
+    contest.create_commands_protocol(f'{name}.xlsx')
 
 # import requests
 # response = requests.get('https://storage.yandexcloud.net/termex-bot/json/contingent.json')

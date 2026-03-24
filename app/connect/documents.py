@@ -1,16 +1,34 @@
 import jinja2
+from pydantic import BaseModel
 from docxtpl import DocxTemplate
 from xhtml2pdf import pisa, files
+from htmldocx import HtmlToDocx
+from docx import Document
 
-class HtmlToPDF:
-    def __init__(self, path_html):
+class HtmlReader:
+    def __init__(self, path_html, data: BaseModel):
         self.html_content = self.open_file(path_html)
-        files.pisaFileObject.getNamedFile = lambda self: self.uri
+        self.env = jinja2.Environment()
+        self.data = data.model_dump()
 
     @staticmethod
     def open_file(path, encoding='utf-8'):
         with open(path, encoding=encoding) as file:
             return file.read()
+
+    def render(self):
+        template = self.env.from_string(self.html_content)
+        self.html_content = template.render(**self.data)
+
+    def create(self, path: str):
+        pass
+
+
+class HtmlToPDF(HtmlReader):
+    def __init__(self, path_html: str, data: BaseModel):
+        super().__init__(path_html, data)
+        files.pisaFileObject.getNamedFile = lambda self: self.uri
+
 
     @staticmethod
     def _create(content, pdf_path, encoding='UTF-8'):
@@ -19,12 +37,23 @@ class HtmlToPDF:
 
         return not pisa_status.err
 
-    def render(self):
-        pass
-
-    def create_pdf(self, path):
+    def create(self, path: str):
         self.render()
         return self._create(self.html_content, path)
+
+class HtmlToWord(HtmlReader):
+    def __init__(self, path_html, data):
+        super().__init__(path_html, data)
+        self.parser = HtmlToDocx()
+        self.doc = Document()
+
+    def create(self, path: str):
+        self.render()
+        self.parser.add_styles_to_run('app/static/style_prot.css')
+        self.parser.add_html_to_document(
+            self.html_content, self.doc)
+        self.parser.run_process()
+        self.doc.save(path)
 
 
 class WordDocument:
@@ -42,11 +71,11 @@ class WordDocument:
 
     def create_document(self) -> str | Exception:
         self.create_name()
-        return self.__document_create(self.doc, self.name_file, self.data, self.jinja_env)
+        return self._document_create(self.doc, self.name_file, self.data, self.jinja_env)
 
 
     @staticmethod
-    def __document_create(docs: DocxTemplate, name_file: str, context: dict, jinja_env: jinja2.Environment) -> str | Exception:
+    def _document_create(docs: DocxTemplate, name_file: str, context: dict, jinja_env: jinja2.Environment) -> str | Exception:
         try:
             docs.render(context, jinja_env)
             docs.save(name_file)

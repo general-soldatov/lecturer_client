@@ -1,3 +1,8 @@
+import os
+import sys
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'C:/Users/Юрий Солдатов/PycharmProjects/lecturer_client')))
+
+
 # import re
 from app.connect.gsheet import UserSheet
 from app.connect.bucket import BucketClient
@@ -9,7 +14,7 @@ from app.connect.bucket import BucketClient
 # from typing import Dict, List
 # import jinja2
 
-# from main import config
+from main import config
 
 
 # file_name = 'contingent.xlsx'
@@ -107,3 +112,20 @@ schedule = {'0': {'ПОНЕДЕЛЬНИК': {'11.40-13.15': 'Физика, Тб�
 
 # for item in td.search_projects('Stepik'):
 #     print(item)
+
+import gspread
+
+TABLE = "Термех 2/2026"
+
+def get_gsheet():
+    gs = gspread.service_account(config.google.data_path)
+    table = gs.open(TABLE)
+    sheet = table.worksheet('rate')
+    return sheet.get_values()[1:]
+
+def main():
+    results = get_gsheet()
+    print(results)
+
+if __name__ == "__main__":
+    main()

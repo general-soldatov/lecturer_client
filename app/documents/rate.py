@@ -33,9 +33,6 @@ class StatementOfSemestr(HtmlToPDF):
         self.environment = jinja2.Environment()
         self.data = data.model_dump()
 
-    def render(self):
-        template = self.environment.from_string(self.html_content)
-        self.html_content = template.render(**self.data)
 
 class DownloadClient(BucketManage):
     def __init__(self, bucket_name, config, session_aws = None):
@@ -106,5 +103,5 @@ class RateCreator(DownloadClient):
             pdf_path = self.path_name(
                 self.project.export_folder,
                 f"{self.project.name_document}_{self.project.discipline}_{profile}.pdf")
-            info = document.create_pdf(pdf_path)
+            info = document.create(pdf_path)
             self.loger(info, pdf_path)
