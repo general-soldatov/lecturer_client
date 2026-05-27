@@ -1,6 +1,6 @@
-import os
-import sys
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'C:/Users/Юрий Солдатов/PycharmProjects/lecturer_client')))
+# import os
+# import sys
+# sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'C:/Users/Юрий Солдатов/PycharmProjects/lecturer_client')))
 
 import logging
 import click
@@ -133,15 +133,22 @@ def clean_up(subject: str, path: str):
 def kettlebell():
     pass
 
-@kettlebell.command("flow", help="Create flow of members")
+@kettlebell.command("register", help="Create register of members")
 @click.option("--path", prompt="Path to contingent")
 @click.option("--gender", prompt="Gender", help="Check gender, who started", type=click.Choice(["male", "female", "none"]))
 @click.option("--platform", prompt="Platform", help="Enter count of platform", default="6")
 @logger_set
-def flow(path: str, gender: str, platform: str):
+def register(path: str, gender: str, platform: str):
     genders = dict(male='М', female='Ж', none=None)
     contest = KettlebellCompetition(path)
-    contest.create_flow(genders[gender], int(platform))
+    contest.create_register(genders[gender], int(platform))
+
+@kettlebell.command("flow", help="Create flow of members")
+@click.option("--path", prompt="Path to contingent")
+@logger_set
+def flow(path: str):
+    contest = KettlebellCompetition(path)
+    contest.create_flow()
 
 @kettlebell.command("summary", help="Create summary of contest's members")
 @click.option("--path", prompt="Path to contingent")

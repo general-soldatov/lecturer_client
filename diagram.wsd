@@ -1,0 +1,5 @@
+@startuml Example
+class Plane {
+
+}
+@enduml

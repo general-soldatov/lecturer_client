@@ -2,9 +2,9 @@ import openpyxl
 from typing import Literal, Tuple
 import pandas as pd
 from itertools import chain
-from app.documents.word import KetllebellFlow, KetllebellSummary
+from app.documents.word import KettlebellFlow, KetllebellSummary
 
-PATH = "app/documents/template_kettlebell/protocol.xlsx"
+PATH = "C:/Users/Юрий Солдатов/PycharmProjects/lecturer_client/app/documents/template_kettlebell/protocol.xlsx"
 CATEGORY = {
     'М': [63, 68, 73, 78, 85, 95],
     'Ж': [58, 63, 68]
@@ -14,13 +14,15 @@ EXCEL = {"step": {"М": 7, "Ж": 1}, "start": {"М": 3, "Ж": 52, "row": 14}, "c
 
 
 class KettlebellCompetition:
-    def __init__(self, path: str, boost: float = 2):
+    def __init__(self, path: str, boost: float = 2,
+                 male_offset=7, female_offset=1):
         self.path = path
         self.df: pd.DataFrame = None
+        self.offset_gender = {'М': male_offset, 'Ж': female_offset}
+        self.boost = boost
+
         self.weight_category = {}
         self.set_weight_category()
-        self.boost = boost
-        self.offset_gender = {'М': 7, 'Ж': 1}
 
 
     @staticmethod
@@ -44,21 +46,24 @@ class KettlebellCompetition:
         self.count_members = len(self.df)
         self.count_commands = len(self.df['ВУЗ'].unique())
 
-    def create_flow(self, first_members: Literal['М', 'Ж'], count_platform: int):
+    def create_flow(self):
+        self.df = pd.read_excel(self.path, sheet_name='results')
+        ketllebel = KettlebellFlow(self.df)
+        print(ketllebel.create_document())
+
+    def create_register(self, first_members: Literal['М', 'Ж'], count_platform: int):
         self.df = pd.read_excel(self.path, sheet_name='register')
         self.assign_weight_category()
         self.df = self.sort_contest_weight(first_members)
         self.set_flow(count_platform)
         self.record(self.df, self.path)
-        ketllebel = KetllebellFlow(self.df)
-        ketllebel.create_document()
 
     def protocol(self, data: Tuple[Literal['М', 'Ж'], str]):
         df_1 = self.set_place(*data)
         summary = KetllebellSummary(df_1,
                                     members=self.count_members,
                                     commands=self.count_commands)
-        summary.create_document(category=data)
+        print(summary.create_document(category=data))
 
     def create_protocol(self, gender: Literal['М', 'Ж'] | None = None, weight: str | None = None):
         self.open_summary()
@@ -68,7 +73,11 @@ class KettlebellCompetition:
             return self.protocol((gender, weight))
         for gender, weights in self.weight_category.items():
             for weight in weights:
-                self.protocol((gender, weight))
+                try:
+                    self.protocol((gender, weight))
+                except Exception as e:
+                    print(e)
+                    continue
 
     def set_weight_category(self):
         for key, value in CATEGORY.items():

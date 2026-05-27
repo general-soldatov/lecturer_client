@@ -18,18 +18,20 @@ class WordQuestion(WordDocument):
             **tickets.configure.study
         }
 
-class KetllebellFlow(WordDocument):
-    def __init__(self, df: DataFrame, path_folder = None, path = "app/documents/template_kettlebell/flows.docx"):
+class KettlebellFlow(WordDocument):
+    def __init__(self, df: DataFrame, path_folder = None, path = "C:/Users/Юрий Солдатов/PycharmProjects/lecturer_client/app/documents/template_kettlebell/flows.docx"):
         super().__init__(path_folder, path)
         self.type_doc = "Потоки_Вузы"
-        self.data = {"data": {key: value.to_dict(orient='records') for key, value in df.groupby(by='Поток')}}
+        self.data = {"data": {key:
+                              value.to_dict(orient='records')
+                              for key, value in df.groupby(by='Поток')}}
 
     def create_name(self):
         path = self.path_doc + "/" if self.path_doc else ""
         self.name_file = f"{path}{self.type_doc}.docx"
 
 class KetllebellSummary(WordDocument):
-    def __init__(self, df: DataFrame, path_folder = None, path = "app/documents/template_kettlebell/summary.docx", **kwargs):
+    def __init__(self, df: DataFrame, path_folder = None, path = "C:/Users/Юрий Солдатов/PycharmProjects/lecturer_client/app/documents/template_kettlebell/summary.docx", **kwargs):
         super().__init__(path_folder, path)
         self.type_doc = "Результаты_Вузы"
         self.df = {key: value.to_dict(orient='records') for key, value in df.groupby(by=['Пол', 'В/К'])}
