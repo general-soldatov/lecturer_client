@@ -1,0 +1,201 @@
+name: "Д6: Определение момента инерции тела произвольной формы и частоты его вибрации."
+theory:
+  - Момент инерции
+  - Формула момента инерции стержня
+  - Формула момента инерции однородного диска
+  - Формула момента инерции прямоугольной пластины
+  - Формула момента инерции кольца
+  - Радиус инерции
+  - Теорема Штейнера-Гюйгенса
+tasks:
+  - question:
+      types: choice
+      text_data: Что называется осевым моментом инерции материальной точки?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - 'Произведение массы точки на квадрат расстояния от точки до оси: $I = m·d²$'
+      wrong:
+      - Произведение массы на скорость
+      - Сумма масс всех точек
+      - Произведение массы на радиус-вектор
+  - question:
+      types: choice
+      text_data: 'Сформулируйте теорему Штейнера — Гюйгенса:'
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $I = I_C + m·d²$
+      wrong:
+      - $I = I_C - m·d²$
+      - $I = I_C·d²$
+      - $I = I_C / (m·d²)$
+  - question:
+      types: number
+      text_data: Определить момент инерции относительно плоскости $Оху$ механической системы, состоя­щей из четырех одинаковых материальных точек, если масса каждой точки $m = 1,5\ кг$, а радиус $r = 0,4\ м$.
+      code_path: null
+      image: https://teor-mech.ru/upload/iblock/587/58709673f84c7a82d8cef98b7749b9ca.jpg
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''
+  - question:
+      types: choice
+      text_data: Как вычисляется момент инерции тонкого кольца (обруча) относительно
+        оси, проходящей через его центр перпендикулярно плоскости?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $I = m·R²$
+      wrong:
+      - $I = \frac{m·R²}{2}$
+      - $I = \frac{2}{5}m·R²$
+      - $I = \frac{m·R²}{12}$
+  - question:
+      types: number
+      text_data: Определить момент инерции относительно оси $Оy$ механической системы, состоящей из трех одинаковых материальных точек, если радиус $r = 0,6\ м$, а масса каждой точки $m = 3\ кг$.
+      code_path: null
+      image: https://teor-mech.ru/upload/iblock/431/4317cce022d2a8768eae3e113f97b3d6.jpg
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''
+  - question:
+      types: matching
+      text_data: Установите соответствие между методом определения момента инерции
+        и его описанием.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - Метод крутильных колебаний
+      - Метод физического маятника
+      - Метод скатывания с наклонной плоскости
+      - Метод Штейнера (расчетный)
+      second:
+      - Измерение периода крутильных колебаний тела на упругом подвесе
+      - Измерение периода малых колебаний тела, подвешенного за точку, не совпадающую
+        с центром масс
+      - Измерение времени скатывания тела по наклонной плоскости и использование закона
+        сохранения энергии
+      - Вычисление момента инерции относительно произвольной оси через момент инерции
+        относительно центра масс
+  - question:
+      types: number
+      text_data: Определить момент инерции относительно центральной оси $Оу$ однородной тонкой квадратной пластины массой $m = 0,3\ кг$, имеющей отверстие радиуса $r = 0,04\ м$.
+      code_path: null
+      image: https://teor-mech.ru/upload/iblock/7ff/7ff381ab0a1ede589016c917ed0325cb.jpg
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''
+  - question:
+      types: matching
+      text_data: Сопоставьте тело с его моментом инерции относительно оси, проходящей
+        через центр масс.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - Тонкое кольцо (обруч) (ось перпендикулярна плоскости)
+      - Тонкий стержень (ось перпендикулярна стержню, проходит через середину)
+      - Сплошной диск (цилиндр) (ось геометрическая)
+      - Тонкий стержень (ось перпендикулярна стержню, проходит через конец)
+      second:
+      - $I_C = m·R²$
+      - $I_C = \frac{m·L²}{12}$
+      - $I_C = \frac{m·R²}{2}$
+      - $I = \frac{m·L²}{3}$ (по теореме Штейнера)
+  - question:
+      types: number
+      text_data: Определить момент инерции однородного диска относительно центра $О$, если его момент инерции относительно оси Ох равен $3 кг·м^2$.
+      code_path: null
+      image: https://teor-mech.ru/upload/iblock/e84/e848708455e0c6a433825b2a4f91e34a.jpg
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''
+  - question:
+      types: matching
+      text_data: Соотнесите вид сил с их вкладом в изменение кинетической энергии
+        системы.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - Внешние силы
+      - Внутренние силы (абсолютно твердое тело)
+      - Внутренние силы (деформируемое тело)
+      - Силы трения (внешние)
+      second:
+      - Могут изменять кинетическую энергию системы
+      - Не совершают работу (суммарная работа равна нулю)
+      - Могут совершать работу и изменять кинетическую энергию
+      - Работа отрицательна, уменьшают кинетическую энергию
+  - question:
+      types: number
+      text_data: На материальную точку массой $m = 4\ кг$ действует сила $\vec{F} = 4\vec{i} + t\vec{j}$. Определить проекцию на ось $Оу$ скорости точки в момент времени $t = 2\ с$, если движение начинается из состояния покоя.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''

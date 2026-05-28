@@ -1,0 +1,248 @@
+name: "Д2: Прямолинейные колебания материальной точки."
+theory:
+  - Кинематические характеристики колебательного движения
+  - Дифференциальное уравнение свободных колебаний
+  - Вынужденные колебания
+  - Дифференциальное уравнение вынужденных колебаний
+tasks:
+  - question:
+      types: choice
+      text_data: Каков общий вид дифференциального уравнения свободных колебаний материальной
+        точки, где $k² = \frac{c}{m}$ ($c$ — коэффициент жесткости, $m$ — масса)?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $ẍ + k²x = 0$
+      wrong:
+      - $ẍ + kx = 0$
+      - $ẍ + k²ẋ = 0$
+      - $ẍ = k²x$
+  - question:
+      types: choice
+      text_data: Что называется характеристическим уравнением для дифференциального
+        уравнения свободных колебаний $ẍ + k²x = 0$?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $r² + k² = 0$
+      wrong:
+      - $r² + k = 0$
+      - $r² - k² = 0$
+      - $r + k² = 0$
+  - question:
+      types: number
+      text_data: Груз массой $m = 45$ кг подвешен к пружине с коэффициентом жесткости
+        $с = 700$ Н/м и находится в свободном прямолинейном вертикальном колебательном
+        движении. Определить модуль ускорения груза в момент времени, когда центр
+        тяжести груза находится на расстоянии $5$ см от положения статического равновесия.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: '0.77778'
+        max_error: '0.05'
+  - question:
+      types: choice
+      text_data: Каковы корни характеристического уравнения для свободных колебаний
+        без сопротивления?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $r₁,₂ = ± i·k$ (чисто мнимые числа)
+      wrong:
+      - $r₁,₂ = ± k$
+      - $r₁,₂ = ± 1/k$
+      - $r₁,₂ = 0$
+  - question:
+      types: choice
+      text_data: Какое решение имеет дифференциальное уравнение свободных колебаний
+        $ẍ + k²x = 0$?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $x = A·sin(kt + \varphi)$
+      - $x = C₁·cos(kt) + C₂·sin(kt)$
+      wrong:
+      - $x = A·e^{kt}$
+      - $x = A·e^{-kt}$
+      - $x = A·t + B$
+  - question:
+      types: number
+      text_data: Тело подвешено к пружине и совершает свободные вертикальные колебания
+        с периодом $T = 0.4$ с. Определить массу точки, если коэффициент жесткости пружины
+        $c = 200$ Н/м.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: '0.93181'
+        max_error: '0.05'
+  - question:
+      types: choice
+      text_data: Какой физический смысл имеет параметр $k$ в уравнении свободных колебаний
+        $ẍ + k²x = 0$?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $k$ — круговая (циклическая) частота собственных колебаний
+      - $k = \sqrt{c/m}$, где $c$ — коэффициент жесткости упругого элемента
+      wrong:
+      - $k$ — частота вынужденных колебаний
+      - $k$ — коэффициент затухания
+      - $k$ — период колебаний
+  - question:
+      types: choice
+      text_data: Как определяется период свободных колебаний?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $T = 2π/k = 2π\sqrt{\frac{m}{c}}$
+      wrong:
+      - $T = \frac{k}{2π}$
+      - $T = 2πk$
+      - $T = \sqrt{\frac{c}{m}}$
+  - question:
+      types: choice
+      text_data: Как выглядит дифференциальное уравнение свободных колебаний с учетом
+        сопротивления (вязкого трения), где $n$ — коэффициент затухания?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $ẍ + 2nẋ + k²x = 0$
+      wrong:
+      - $ẍ + k²ẋ = 0$
+      - $ẍ + 2nx + k²x = 0$
+      - $ẍ + k²x = F·sin(ωt)$
+  - question:
+      types: matching
+      text_data: Сопоставьте термин с определением.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - Дифференциальное уравнение свободных колебаний
+      - Характеристическое уравнение
+      - Круговая частота $k$
+      - Период колебаний $T$
+      second:
+      - $ẍ + k²x = 0$
+      - $r² + k² = 0$ (для случая без сопротивления)
+      - $\sqrt{\frac{c}{m}}$, определяет частоту собственных колебаний
+      - $T = \frac{2π}{k}$, время одного полного колебания
+  - question:
+      types: matching
+      text_data: Соотнесите формулу с физической величиной (свободные колебания без
+        сопротивления).
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - $x(t) = A·sin(kt + \varphi)$
+      - $A = \sqrt{x₀² + (v₀/k)²}$
+      - $tg \varphi = k·x₀ / v₀$ (при записи $x = A·sin(kt + \varphi)$)
+      - $T = 2π\sqrt{\frac{m}{c}}$
+      second:
+      - Закон свободных колебаний
+      - Амплитуда колебаний через начальные условия
+      - Начальная фаза колебаний (для формы $sin$)
+      - Период свободных колебаний
+  - question:
+      types: number
+      text_data: Постоянная по модулю и направлению сила действует на тело в течение
+        8 с. Найти модуль ее импульса за это время, если проекции силы на оси координат
+        $F_x$ = 6Н, $F_y$ = 9Н.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: '86.53323'
+        max_error: '0.05'
+  - question:
+      types: matching
+      text_data: Сопоставьте тип корней характеристического уравнения с характером
+        свободных колебаний (при наличии сопротивления).
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - $n < k$ (малое затухание)
+      - $n > k$ (большое затухание)
+      - $n = k$ (критическое затухание)
+      - $n = 0$ (отсутствие сопротивления)
+      second:
+      - Затухающие колебания (квазипериодический процесс)
+      - Апериодическое движение (без колебаний)
+      - Апериодическое движение (граничный случай)
+      - Незатухающие гармонические колебания

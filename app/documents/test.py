@@ -129,8 +129,9 @@ class TestQuestion:
                                alignment: WD_ALIGN_PARAGRAPH = WD_ALIGN_PARAGRAPH.LEFT,
                                bg_color: str = None):
         """Применяет форматирование к ячейке таблицы"""
-        cell.text = text
+        # cell.text = text # TODO: add_formula
         paragraph = cell.paragraphs[0]
+        self.add_to_docx_with_latex(paragraph, text)
         paragraph.alignment = alignment
 
         if paragraph.runs:
@@ -211,7 +212,8 @@ class TestQuestion:
         question_para.add_run(f"Вопрос {question_number}. ").bold = True
         if description:
             question_para.add_run(f"({description}) ").bold = True
-        question_para.add_run(self.question_text).bold = False
+        self.add_to_docx_with_latex(question_para, self.question_text)
+        # question_para.add_run(self.question_text).bold = False
         # question_para.add_run(f" [{self.points} балл]").italic = True
         question_para.paragraph_format.space_after = Pt(6)
 
@@ -236,7 +238,8 @@ class SingleChoiceQuestion(TestQuestion):
             option_para.bold = True
             option_para.add_run("☐ ").font.size = Pt(12)
             option_para.add_run(f"{self._add_numbering(i)} ").bold = False
-            option_para.add_run(option).bold = False
+            self.add_to_docx_with_latex(option_para, option)
+            # option_para.add_run(option).bold = False
             option_para.paragraph_format.left_indent = Pt(20)
 
             # Для демонстрации помечаем правильный ответ (в реальном тесте это скрыто)
@@ -285,7 +288,8 @@ class MultipleChoiceQuestion(TestQuestion):
             option_para.bold = True
             option_para.add_run("☐ ").font.size = Pt(12)
             option_para.add_run(f"{self._add_numbering(i)} ").bold = False
-            option_para.add_run(option).bold = False
+            self.add_to_docx_with_latex(option_para, option)
+            # option_para.add_run(option).bold = False
             option_para.paragraph_format.left_indent = Pt(20)
 
 
@@ -319,7 +323,8 @@ class MatchingQuestion(TestQuestion):
         title_cell = title_table.cell(0, 0)
         title_para = title_cell.paragraphs[0]
         title_para.add_run(f"Вопрос {question_number}. ").bold = True
-        title_para.add_run(self.question_text).bold = False
+        self.add_to_docx_with_latex(title_para, self.question_text)
+        # title_para.add_run(self.question_text).bold = False
         # title_para.add_run(f" [{self.points} балл]").italic = True
 
         # Создаем таблицу для сопоставления
@@ -422,7 +427,8 @@ class SortingQuestion(TestQuestion):
         for i, item in enumerate(self.items, start=1):
             item_para = content_cell.add_paragraph()
             item_para.add_run(f"{i}. ").bold = True
-            item_para.add_run(item)
+            self.add_to_docx_with_latex(item)
+            # item_para.add_run(item)
             item_para.paragraph_format.left_indent = Pt(20)
             item_para.paragraph_format.background_color = RGBColor(255, 255, 255)
             item_para.paragraph_format.space_after = Pt(3)
@@ -645,7 +651,8 @@ class TestGenerator:
                                        alignment=WD_ALIGN_PARAGRAPH.CENTER)
 
 class LabGenerator:
-    def __init__(self, number: int, title: str, theory: List[str],
+    def __init__(self, number: int, #title: str, theory: List[str],
+                 project: Project, directory_image: str,
                  template: str = "Расчётно-графическая задача №{}",
                  temp_complete: str = "{}\nрасчётно-графической задачи", doc: Optional[Docx] = None):
         self.document = doc
@@ -653,10 +660,12 @@ class LabGenerator:
             self.document = Document()
         self.questions = []
         self.name = template.format(number)
-        self.title = title
-        self.theory = theory
-        self.font_name="Times New Roman"
+        self.title = project.name
+        self.theory = project.theory
+        self.tasks = project.tasks
+        self.font_name = "Times New Roman"
         self.complete = temp_complete
+        self.directory_image = directory_image
 
     def _apply_cell_formatting(self, cell, text: str, font_size: int = 11, font_name: str = "Arial",
                                bold: bool = False, italic: bool = False, sub_text: str | None = None,
@@ -765,87 +774,88 @@ class LabGenerator:
             print(f"✅ Лабораторная успешно создана: {output_filename}")
             # print(f"📊 Всего вопросов: {len(self.questions)}")
             # print(f"⭐ Максимальный балл: {self.get_total_points()}")
-
-# ============= ПРИМЕР ИСПОЛЬЗОВАНИЯ =============
-def build_labs(project: Project, path_to_doc: str, directory = "images_task"):
+    @staticmethod
     def data_shuffle(task):
         lst = task.answer.correct + task.answer.wrong
         shuffle(lst)
         return lst
 
+    @staticmethod
     def elem_shuffle(elems):
         shuffle(elems)
         return elems
-    doc = Document()
-    for i, elem in enumerate(project.elems, 1):
-        lab = LabGenerator(i, elem.name, elem.theory, doc=doc)
-        for task in elem.tasks:
-            if task.question.types == QuestionsType.CHOICE.value and len(task.answer.correct) > 1:
-                lab.add_question(
-                    MultipleChoiceQuestion(
-                    question_text=task.question.text_data,
-                    options=data_shuffle(task),
-                    correct_answers=[0, 2],  # Django, Flask, FastAPI
-                    points=2
-                ))
-                continue
-            match task.question.types:
-                case QuestionsType.CHOICE.value:
-                    lab.add_question(
-                        SingleChoiceQuestion(
-                            question_text=task.question.text_data,
-                            options=data_shuffle(task),
-                            correct_answer=2,  # Python (индексация с 0)
-                            points=1
-                        )
-                    )
-                case QuestionsType.MATCHING.value:
-                    lab.add_question(
-                        MatchingQuestion(
-                            question_text=task.question.text_data,
-                            left_items=elem_shuffle(task.answer.first),
-                            right_items=elem_shuffle(task.answer.second),
-                            matches=[(0, 1)],  # Python → Data Science, JavaScript → Web, etc.
-                            points=3
-                        )
-                    )
-                case QuestionsType.SORTING.value:
-                    lab.add_question(
-                        SortingQuestion(
-                            question_text=task.question.text_data,
-                            items=elem_shuffle(task.answer.steps),
-                            correct_order=[1, 2, 3, 0],  # Quick → Merge → Selection → Bubble
-                            points=2
-                        )
-                    )
-                case QuestionsType.NUMBER.value:
-                    path = None
-                    if task.question.image:
-                        response = requests.get(task.question.image)
-                        if response.status_code == 200:
-                            if not os.path.exists(directory):
-                                os.makedirs(directory)
-                                print("Директория создана")
 
-                            path = os.path.join(directory, task.question.image.split('/')[-1])
-                            with open(path, 'wb') as file:
-                                file.write(response.content)
-                            print('Изображение сохранено', path)
-                        else:
-                            print('Ошибка загрузки изображения')
-                    lab.add_question(
-                        NumberTask(
-                            question_text=task.question.text_data,
-                            image_path=path
-                        )
+    def check_type_to_add(self, task):
+        if task.question.types == QuestionsType.CHOICE.value and len(task.answer.correct) > 1:
+            return self.add_question(
+                MultipleChoiceQuestion(
+                question_text=task.question.text_data,
+                options=self.data_shuffle(task),
+                correct_answers=[0, 2],  # Django, Flask, FastAPI
+                points=2
+            ))
+
+        match task.question.types:
+            case QuestionsType.CHOICE.value:
+                self.add_question(
+                    SingleChoiceQuestion(
+                        question_text=task.question.text_data,
+                        options=self.data_shuffle(task),
+                        correct_answer=2,  # Python (индексация с 0)
+                        points=1
                     )
-        lab.generate()
-        doc.add_page_break()
+                )
+            case QuestionsType.MATCHING.value:
+                self.add_question(
+                    MatchingQuestion(
+                        question_text=task.question.text_data,
+                        left_items=self.elem_shuffle(task.answer.first),
+                        right_items=self.elem_shuffle(task.answer.second),
+                        matches=[(0, 1)],  # Python → Data Science, JavaScript → Web, etc.
+                        points=3
+                    )
+                )
+            case QuestionsType.SORTING.value:
+                self.add_question(
+                    SortingQuestion(
+                        question_text=task.question.text_data,
+                        items=self.elem_shuffle(task.answer.steps),
+                        correct_order=[1, 2, 3, 0],  # Quick → Merge → Selection → Bubble
+                        points=2
+                    )
+                )
+            case QuestionsType.NUMBER.value:
+                path = None
+                if task.question.image:
+                    response = requests.get(task.question.image)
+                    if response.status_code == 200:
+                        if not os.path.exists(self.directory_image):
+                            os.makedirs(self.directory_image)
+                            print("Директория создана")
 
-    doc.save(path_to_doc)
-    print("\n✨ Проект успешно создан! Откройте файл:", path_to_doc)
+                        path = os.path.join(self.directory_image, task.question.image.split('/')[-1])
+                        with open(path, 'wb') as file:
+                            file.write(response.content)
+                        print('Изображение сохранено', path)
+                    else:
+                        print('Ошибка загрузки изображения')
+                self.add_question(
+                    NumberTask(
+                        question_text=task.question.text_data,
+                        image_path=path
+                    )
+                )
+
+    def generate_labs(self):
+        for task in self.tasks:
+            self.check_type_to_add(task)
+
+        self.generate()
+        self.document.add_page_break()
 
 
+
+# ============= ПРИМЕР ИСПОЛЬЗОВАНИЯ =============
 def create_labs():
     lab = LabGenerator(1, 'Physical tehemes', ['Theormex', 'Phys', 'Datalens'])
     questions = [

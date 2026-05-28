@@ -1,4 +1,4 @@
-# import os
+import os
 # import sys
 # sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), 'C:/Users/Юрий Солдатов/PycharmProjects/lecturer_client')))
 
@@ -167,6 +167,26 @@ def summary(path: str, gender: str, category: str | None):
 def commands(path: str, name: str):
     contest = KettlebellCompetition(path)
     contest.create_commands_protocol(f'{name}.xlsx')
+
+@cli.command("notebook", help="Build documents notebook with folder to docx file")
+@click.option("--path", prompt="Path", help="Check path to makefile's folder")
+@click.option("--name", prompt="Name", help="Enter name of docx file", default='notebook_termex.docx')
+@click.option("--folder", prompt="Folder", help="Check folder to images output", default="images_task")
+@logger_set
+def notebook(path, name, folder):
+    from app.documents.test import LabGenerator
+    from app.documents.test_make import Project
+    from docx import Document
+    folder = os.path.join(path, folder)
+    list_of_projects = [f for f in os.listdir(path) if f.endswith('.yaml')]
+    doc = Document()
+    for i, elem in enumerate(list_of_projects, 1):
+        project = Project.model_validate_yaml(os.path.join(path, elem))
+        lab = LabGenerator(i, project, folder, doc = doc)
+        lab.generate_labs()
+
+    doc.save(os.path.join(path, name))
+    print("\n✨ Проект успешно создан! Откройте файл:", os.path.join(path, name))
 
 # import requests
 # response = requests.get('https://storage.yandexcloud.net/termex-bot/json/contingent.json')

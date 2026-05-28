@@ -1,0 +1,332 @@
+name: "А2: Аналитическое решение задачи сложного движения точки с помощью уравнения Лагранжа II рода."
+theory:
+  - "Принцип Даламбера в обобщённых силах"
+  - Уравнения Эйлера-Лагранжа II рода
+  - Функция Лагранжа механической системы
+  - Гиперболические функции
+tasks:
+  - question:
+      types: choice
+      text_data: В каком случае внутренние силы не совершают работы?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - Для абсолютно твердого тела (расстояния между точками неизменны)
+      - Для идеальных связей
+      - Для систем, где внутренние силы консервативны
+      wrong:
+      - Всегда совершают работу
+      - Никогда не совершают работу
+      - Только при наличии трения
+  - question:
+      types: choice
+      text_data: Что называется кинетической энергией механической системы?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $T = Σ (\frac{m_i·v_i²}{2})$'
+      wrong:
+      - $T = \frac{M·v_C²}{2}$
+      - $T = \frac{I·ω²}{2}$
+      - $T = Σ m_i·g·h_i$
+  - question:
+      types: choice
+      text_data: Для решения каких задач наиболее эффективно применяются уравнения
+        Лагранжа второго рода?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - Для систем со связями и несколькими степенями свободы
+      - Для задач, где не требуется определять реакции связей
+      - Для систем с идеальными связями
+      wrong:
+      - Только для задач с одной степенью свободы
+      - Только для свободной материальной точки
+      - Для задач, где требуется найти все силы
+  - question:
+      types: number
+      text_data: Определить обобщенную силу инерции, соответствующую обобщенной координате $\varphi$, если сила инерции $Ф_1 = 0,5\ Н$, моменты сил инерции $M_1^Ф = 0,2\ Н·м,\ M_1^Ф = 0,1\ Н·м$, радиус $r = 0,2\ м$.
+      code_path: null
+      image: https://teor-mech.ru/upload/iblock/fea/fea66042fe745bf571197961215ef7a1.jpg
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''
+  - question:
+      types: choice
+      text_data: Как выглядит теорема об изменении кинетической энергии системы в
+        интегральной (конечной) форме?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - '$T₂ - T₁ = Σ A_{внеш} + Σ A_{внутр}$'
+      wrong:
+      - $T₂ - T₁ = Σ A_{внеш}$
+      - $T₂ - T₁ = 0$
+      - $T = const$
+  - question:
+      types: choice
+      text_data: Какие математические операции включает в себя составление уравнения
+        Лагранжа?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - Дифференцирование кинетической энергии по обобщенной скорости и по обобщенной
+        координате
+      - Дифференцирование по времени от производной по скорости
+      - Вычисление обобщенной силы
+      wrong:
+      - Интегрирование по времени
+      - Решение системы алгебраических уравнений
+      - Построение графиков
+  - question:
+      types: number
+      text_data: Грузы $1$ и $2$, массы которых $m_2 = 2m_1$, прикреплены к тросу, переброшенному через блок радиуса $r$. Пренебрегая массой блока, определить ускорение грузов.
+      code_path: null
+      image: https://teor-mech.ru/upload/iblock/b98/b98336c34ca7eaac562c9aa3d3ade9a2.jpg
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''
+  - question:
+      types: matching
+      text_data: Сопоставьте тип силы с характеристикой её работы.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - Консервативные (потенциальные) силы
+      - Неконсервативные (диссипативные) силы
+      - Силы, перпендикулярные перемещению
+      - Постоянная сила, направленная вдоль перемещения
+      second:
+      - Работа не зависит от траектории, существует потенциальная энергия
+      - Работа зависит от траектории (например, силы трения)
+      - Работа равна нулю
+      - Работа положительна и равна $A = F·S$
+  - question:
+      types: number
+      text_data: Потенциальная энергия механической системы $W = 15φ^2$ , где $φ$ - в рад. Определить обобщенную силу, соответствующую обобщенной координате $φ$ в момент времени, когда угол = $90°$.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''
+  - question:
+      types: choice
+      text_data: 'Уравнение Лагранжа второго рода для обобщенной координаты $q_i$ имеет
+        вид:'
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $\frac{d}{dt} (\frac{∂T}{∂q̇_i}) - \frac{∂T}{∂q_i} = Q_i$
+      wrong:
+      - $\frac{d}{dt} (\frac{∂T}{∂q_i}) - \frac{∂T}{∂q̇_i} = Q_i$
+      - $\frac{d}{dt} (\frac{∂L}{∂q̇_i}) - \frac{∂L}{∂q_i} = 0$ (для консервативных систем)
+      - $dT = Σ Q_i dq_i$
+  - question:
+      types: matching
+      text_data: Соотнесите формулу с физической величиной.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - $L = T - П$
+      - $Q_i = -∂П/∂q_i$
+      - $T = \frac{1}{2} Σ a_{ij} q̇_i q̇_j$
+      - $δA = Σ Q_i δq_i$
+      second:
+      - Функция Лагранжа (лагранжиан)
+      - Обобщенная сила для консервативной системы
+      - Кинетическая энергия как квадратичная форма обобщенных скоростей
+      - Элементарная работа активных сил на возможных перемещениях
+  - question:
+      types: number
+      text_data: Механизм движется в вертикальной плос­кости. Кинетическая энергия $Т = 2φ^2$, обоб­щенная сила, соответствующая координате равна $Q_φ = М - 8cosφ$. Определить момент $М$ пары сил, приложенной к кривошипу $ОА$, ког­да угловое ускорение $φ = 2\ рад/с^2$ и угол $φ = 0,25π\ рад$.
+      code_path: null
+      image: https://teor-mech.ru/upload/iblock/896/89662f1aba53ec8d3c9d8ebda8e36a1c.jpg
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''
+  - question:
+      types: choice
+      text_data: Какой параметр определяет число степеней свободы механической системы?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - Количество независимых обобщенных координат
+      wrong:
+      - Количество тел в системе
+      - Количество связей
+      - Сумма масс всех тел
+  - question:
+      types: matching
+      text_data: Соотнесите математическое выражение с его ролью в уравнении Лагранжа.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - $\frac{∂T}{∂q̇}$
+      - $\frac{d}{dt}(\frac{∂T}{∂q̇})$
+      - $\frac{∂T}{∂q}$
+      - $Q$
+      second:
+      - Обобщенный импульс
+      - Инерционный член (производная обобщенного импульса)
+      - Позиционная сила (центробежные и кориолисовы члены)
+      - Обобщенная сила (внешние воздействия)
+  - question:
+      types: choice
+      text_data: Когда в уравнениях Лагранжа удобно использовать гиперболические функции
+        ($sh$, $ch$, $th$)?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - При описании движения с переменной длиной связей (например, маятник с изменяемой
+        длиной нити)
+      - В задачах с экспоненциальным ростом решений (неустойчивые движения)
+      - При решении линеаризованных уравнений для систем с отрицательной жесткостью
+      wrong:
+      - Для описания периодических колебаний
+      - Только при вращательном движении
+      - Для равномерного прямолинейного движения
+  - question:
+      types: number
+      text_data: Потенциальная энергия механической системы $W = 15φ^2$ , где $φ$ - в рад. Определить обобщенную силу, соответствующую обобщенной координате $φ$ в момент времени, когда угол = $90°$.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''
+  - question:
+      types: choice
+      text_data: Как найти обобщенную силу $Q_i$, соответствующую обобщенной координате
+        $q_i$?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $Q_i = Σ F_k · (∂r_k/∂q_i)$
+      - $Q_i = - \frac{∂П}{∂q_i}$ (для потенциальных сил)
+      - 'Из выражения элементарной работы: $δA = Σ Q_i δq_i$'
+      wrong:
+      - $Q_i = Σ F_k · v_k$
+      - $Q_i = \frac{d}{dt} (\frac{∂T}{∂q̇_i})$
+      - $Q_i = \frac{T}{∂q_i}$
+  - question:
+      types: matching
+      text_data: Сопоставьте термин с определением.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - Уравнение Лагранжа II рода
+      - Обобщенная координата
+      - Обобщенная сила
+      - Аналитическая механика
+      second:
+      - $\frac{d}{dt}(\frac{∂T}{∂q̇}) - \frac{∂T}{∂q} = Q$
+      - Независимый параметр, определяющий положение системы
+      - Коэффициент при вариации обобщенной координаты в выражении работы
+      - Раздел механики, основанный на вариационных принципах и скалярных функциях

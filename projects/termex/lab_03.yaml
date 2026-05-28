@@ -1,0 +1,221 @@
+name: "Д3: Теорема о движении центра масс системы. Теорема об изменении количества движения системы."
+theory:
+  - Система материальных точек
+  - Внешние силы
+  - Внутренние силы
+  - Формула определения центра масс системы
+  - Свойства внутренних сил
+  - Теорема о движении центра масс
+  - Дифференциальные уравнения движения системы в векторной форме
+  - Закон сохранения движения центра масс
+tasks:
+  - question:
+      types: choice
+      text_data: Что называется системой материальных точек?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - Совокупность материальных точек, движение которых взаимосвязано и рассматривается
+        совместно
+      wrong:
+      - Любое множество материальных точек
+      - Одна материальная точка
+      - Твердое тело
+  - question:
+      types: matching
+      text_data: Соотнесите формулу с теоремой (законом) динамики системы.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - $\frac{dQ}{dt} = Σ F^{внеш}$
+      - $M·a_C = Σ F^{внеш}$
+      - $\frac{dK_O}{dt} = Σ M_O(F^{внеш})$
+      - $Q = const$ при $Σ F^{внеш} = 0$
+      second:
+      - Теорема об изменении количества движения
+      - Теорема о движении центра масс
+      - Теорема об изменении главного момента количества движения
+      - Закон сохранения количества движения
+  - question:
+      types: choice
+      text_data: Какие силы называются внешними по отношению к механической системе?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - Силы, действующие на точки системы со стороны тел, не входящих в данную систему
+      wrong:
+      - Силы взаимодействия между точками внутри системы
+      - Силы, приложенные к центру масс
+      - Силы, зависящие только от времени
+  - question:
+      types: choice
+      text_data: Какие силы называются внутренними?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - Силы взаимодействия между материальными точками, входящими в систему
+      wrong:
+      - Силы, действующие на систему извне
+      - Силы тяжести
+      - Силы упругости
+  - question:
+      types: matching
+      text_data: Сопоставьте термин с определением.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - Система материальных точек
+      - Внешние силы
+      - Внутренние силы
+      - Центр масс
+      second:
+      - Совокупность материальных точек, рассматриваемых как единое целое
+      - Силы, действующие на точки системы со стороны тел, не входящих в систему
+      - Силы взаимодействия между точками внутри системы
+      - Точка, характеризующая распределение масс в системе, $r_C = \frac{Σ m_i\cdot r_i}{M}$
+  - question:
+      types: matching
+      text_data: Установите соответствие между свойством и типом сил.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - $Σ F_{внутр} = 0$
+      - $Σ M_{внутр} = 0$ (относительно любого центра)
+      - Могут изменять кинетическую энергию системы
+      - Не могут изменить положение центра масс системы
+      second:
+      - Свойство внутренних сил (векторная сумма)
+      - Свойство внутренних сил (сумма моментов)
+      - Внутренние силы (могут совершать работу)
+      - Внутренние силы (не влияют на движение центра масс)
+  - question:
+      types: number
+      text_data: Положение центра масс $С$ механической системы массой $m = 50$ кг определяется радиусом-вектором $\vec{r_с} = 3\vec{i} + 4\vec{j} + 5\vec{k}$. Определить статический момент масс этой системы относительно плос­кости $Оху$.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''
+  - question:
+      types: choice
+      text_data: Как записываются дифференциальные уравнения движения системы материальных
+        точек в векторной форме?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $m_i·a_i = F_i^{внеш} + F_i^{внутр}$ для каждой точки $i$
+      wrong:
+      - $M·a_C = Σ F^{внеш}$ (только для центра масс)
+      - $Σ m_i·a_i = 0$
+      - $m_i·v_i = const$
+  - question:
+      types: number
+      text_data: Механическая система движется так, что проекции ускорения ее центра масс $С$ на оси координат равны $а_{Сх} = 1\ м/с^2,\ а_{Су} = 2 м/с^2,\ a_{Cz} = 4 м/с^2$. Определить модуль главного вектора внешних сил, действующих на систему, если масса системы $m = 40$ кг.
+      code_path: null
+      image: https://teor-mech.ru/upload/iblock/be9/be9ab5409d37f6a297589074a634daeb.jpg
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''
+  - question:
+      types: choice
+      text_data: В каком случае выполняется закон сохранения движения центра масс?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - 'Когда геометрическая сумма всех внешних сил равна нулю: $Σ F^{внеш} = 0$'
+      - 'Тогда скорость центра масс постоянна: $v_C = const$'
+      wrong:
+      - Когда сумма моментов внешних сил равна нулю
+      - Когда внутренние силы совершают работу
+      - Когда система замкнута по массе
+  - question:
+      types: choice
+      text_data: Как связаны количество движения системы и скорость ее центра масс, где $M$ — полная масса системы, $v_C$ — скорость центра масс?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $Q = M·v_C$
+      wrong:
+      - $Q = M·a_C$
+      - $Q = Σ m_i·r_i$
+      - $Q = I·ω$
+  - question:
+      types: number
+      text_data: Диск массой $m = 20$ кг вращается равно­мерно вокруг неподвижной оси с угловой скоростью $ω = 10$ рад/с. Определить модуль глав­ного вектора внешних сил, приложенных к диску, если его центр тяжести удален от оси вращения на расстояние $ОС = 0.5$ см.
+      code_path: null
+      image: https://teor-mech.ru/upload/iblock/4e7/4e7ca4e656edbb525c2ae1410cb2ba75.jpg
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''

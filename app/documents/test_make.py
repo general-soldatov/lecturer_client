@@ -57,19 +57,19 @@ class TaskTemplate(YamlProject):
     question: Question
     answer: Union[AnswerTest, AnswerMatching, AnswerSorting, AnswerNumber, SourceString]
 
-class Elems(BaseModel):
+class Project(YamlProject):
     name: str
     theory: List[str]
     tasks: List[TaskTemplate]
 
-class Project(BaseModel):
-    elems: List[Elems]
+# class Project(BaseModel):
+#     elems: List[Elems]
 
-    @staticmethod
-    def read(path: str):
-        with open(path, 'r', encoding='utf-8') as file:
-            return yaml.safe_load(file.read())
+#     @staticmethod
+#     def read(path: str):
+#         with open(path, 'r', encoding='utf-8') as file:
+#             return yaml.safe_load(file.read())
 
-    @classmethod
-    def open_project(cls, path: str):
-        return cls(elems = cls.read(path))
+#     @classmethod
+#     def open_project(cls, path: str):
+#         return cls(elems = cls.read(path))

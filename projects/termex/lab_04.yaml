@@ -1,0 +1,151 @@
+name: "Д4: Теорема об изменении кинетического момента системы."
+theory:
+  - Закон сохранения количества движения системы
+  - Главный момент количества движения системы (кинетический момент)
+  - Теорема об изменении кинетического момента системы
+  - Закон сохранения кинетического момента
+tasks:
+  - question:
+      types: matching
+      text_data: Сопоставьте формулу с физической величиной.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - $p = m\cdot v$
+      - $S = ∫ F dt$
+      - $Δp = S$
+      - $F_{ин} = -m\cdot a$
+      second:
+      - Количество движения
+      - Импульс силы
+      - Теорема об изменении количества движения
+      - Сила инерции (принцип Даламбера)
+  - question:
+      types: choice
+      text_data: Каким свойством обладают внутренние силы для любой механической системы?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - Геометрическая сумма всех внутренних сил равна нулю
+      - Сумма моментов всех внутренних сил относительно любого центра равна нулю
+      wrong:
+      - Работа всех внутренних сил всегда равна нулю
+      - Внутренние силы всегда консервативны
+      - Внутренние силы всегда равны нулю
+  - question:
+      types: matching
+      text_data: Соотнесите формулу с физической величиной (динамика системы).
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - $M·a_C = Σ F_{внеш}$
+      - $I = Σ m_i·r_i²$ (для оси)
+      - $I = I_C + m·d²$
+      - $\rho = \sqrt{I/m}$
+      second:
+      - Теорема о движении центра масс
+      - Осевой момент инерции системы материальных точек
+      - Теорема Штейнера — Гюйгенса
+      - Радиус инерции
+  - question:
+      types: number
+      text_data: Определить в кН среднюю силу удара молотка массой $m = 0.7$ кг при
+        абсолютно неупругом ударе по наковальне, если скорость до удара $v = 9$ м/с
+        и время удара $0.0005$ с.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: '12.6'
+        max_error: '0.05'
+  - question:
+      types: choice
+      text_data: Что называется количеством движения (импульсом) системы материальных
+        точек?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - '$Q = Σ m_i·v_i$'
+      - $Q = M·v_C$, где $M$ — масса системы, $v_C$ — скорость центра масс
+      wrong:
+      - $Q = Σ F·t$
+      - $Q = M·a_C$
+      - $Q = Σ m_i·r_i$
+  - question:
+      types: number
+      text_data: Постоянная по модулю и направлению сила действует на тело в течение $10$ с. Найти модуль ее импульса за это время, если проекции силы на оси координат $F_x =\ 3\ Н,\ Fy = 4\ Н$.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''
+  - question:
+      types: matching
+      text_data: Сопоставьте термин с определением.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - Количество движения системы
+      - Главный момент количества движения
+      - Центр масс системы
+      - Закон сохранения движения центра масс
+      second:
+      - $Q = Σ m_i·v_i = M·v_C$
+      - $K_O = Σ (r_i × m_i·v_i)$
+      - Точка, движение которой определяется только внешними силами
+      - При $Σ F^{внеш} = 0$, $v_C = const$
+  - question:
+      types: number
+      text_data: На материальную точку массой 2 кг дейст­вует сила постоянного направления, значение которой изменяется но закону $F = 6t^2$. Опре­делить скорость этой точки в момент времени $t = 2$ с, если начальная скорость точки $v_0 = 2$ м/с.
+      code_path: null
+      image: https://teor-mech.ru/upload/iblock/fcf/fcf0ad93940adbace76607a49d13cf94.jpg
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: ''
+        max_error: ''

@@ -1,0 +1,262 @@
+name: "Д1: Дифференциальные уравнения движения точки. Общие теоремы динамики точки."
+theory:
+  - Динамика
+  - Инертность
+  - Количество движения
+  - Импульс силы
+  - "Принцип Даламбера"
+  - Работа силы
+  - Силовое поле
+tasks:
+  - question:
+      types: choice
+      text_data: Что называется элементарной работой силы?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - 'Скалярная величина, равная скалярному произведению вектора силы на вектор
+        элементарного перемещения: $dA = F·dr = F·ds·cos α$'
+      wrong:
+      - Произведение модуля силы на модуль перемещения
+      - Произведение массы на ускорение
+      - Векторная величина, равная $F × dr$
+  - question:
+      types: choice
+      text_data: В каких случаях работа силы положительна?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - Когда угол между направлением силы и направлением перемещения острый ($0 ≤
+        α < 90°$)
+      wrong:
+      - Когда угол $α = 90°$
+      - Когда угол $α > 90°$
+      - Когда сила перпендикулярна перемещению
+  - question:
+      types: choice
+      text_data: Как вычисляется работа постоянной силы на прямолинейном перемещении?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $A = F·S·cos α$
+      wrong:
+      - $A = F·S$
+      - $A = m·v²/2$
+      - $A = ∫ F·v dt$
+  - question:
+      types: number
+      text_data: Точка массой $m = 2$ кг движется по горизонтальной прямой с ускорением
+        $a = 0.1 t$. Определить модуль силы, действующей на точку в направлении ее движения
+        в момент времени $t = 9$ с.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: '16.2'
+        max_error: '0.05'
+  - question:
+      types: matching
+      text_data: Сопоставьте термин с определением.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - Динамика
+      - Инертность
+      - Количество движения
+      - Импульс силы
+      second:
+      - Раздел механики, изучающий движение тел под действием сил
+      - Свойство тела сопротивляться изменению скорости
+      - Мера механического движения, $p = m\cdot v$
+      - Мера действия силы за промежуток времени, $S = ∫ F dt$
+  - question:
+      types: number
+      text_data: Точка массой $m = 10$ кг движется по горизонтальной оси $Ox$ с ускорением
+        $a_х = \ln (t)$. Определить модуль силы, действующей на точку в направлении движения
+        в момент времени $t = 6$ с.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: '17.91759'
+        max_error: '0.05'
+  - question:
+      types: number
+      text_data: Моторная лодка массой $m = 250$ кг после остановки мотора движется
+        прямолинейно, преодолевая сопротивление воды. Сила сопротивления $R = 4v^2$.
+        Определить ускорение лодки, когда ее скорость $v = 5$ м/с.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: '-0.4'
+        max_error: '0.05'
+  - question:
+      types: number
+      text_data: Трактор, двигаясь с ускорением $а = 2 м/с^2$ по горизонтальному участку
+        пути, перемещает нагруженные сани массой 600 кг. Определить силу тяги на крюке,
+        если коэффициент трения скольжения саней $f = 0.05$.
+      code_path: null
+      image: https://storage.yandexcloud.net/phys-bot/mechanic/dynamics_3_1.jpg
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: '1494.183'
+        max_error: '0.05'
+  - question:
+      types: matching
+      text_data: Соотнесите формулу с физической величиной.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - $dA = F·dr$
+      - $A = F·S·cos α$
+      - $T = m·v²/2$
+      - $N = F·v$
+      second:
+      - Элементарная работа силы
+      - Работа постоянной силы на прямолинейном перемещении
+      - Кинетическая энергия материальной точки
+      - Мощность силы
+  - question:
+      types: number
+      text_data: Материальная точка массой $m = 47$ кг из состояния покоя движется по
+        гладкой горизонтальной направляющей под действием силы $F = 45$ Н, вектор которой
+        образует постоянный угол $α = 20°$ с направляющей. Определить путь, пройденный
+        точкой за время $t = 12$ с.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      data:
+      - answer: '64.77881'
+        max_error: '0.05'
+  - question:
+      types: choice
+      text_data: Какие силы называются потенциальными (консервативными)?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - Силы, работа которых не зависит от траектории, а определяется только начальным
+        и конечным положением точки
+      - Силы, для которых существует потенциальная энергия
+      wrong:
+      - Силы, работа которых всегда положительна
+      - Силы, зависящие только от времени
+      - Силы, работа которых зависит от пути
+  - question:
+      types: choice
+      text_data: Как вычисляется потенциальная энергия тела в поле силы тяжести вблизи
+        поверхности Земли?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $W = m·g·h$
+      wrong:
+      - $W = m·g$
+      - $W = m·v²/2$
+      - $W = m·g·h²$
+  - question:
+      types: choice
+      text_data: Какое выражение определяет мощность силы?
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      correct:
+      - $N = \frac{dA}{dt} = F·v$
+      wrong:
+      - $N = F·S$
+      - $N = m·v$
+      - $N = A·t$
+  - question:
+      types: matching
+      text_data: Соотнесите пример с видом энергии или работы, который в нем преимущественно
+        рассматривается.
+      code_path: null
+      image: null
+      help: null
+    answer:
+      sample_size: null
+      feedback:
+        correct: ''
+        wrong: ''
+      first:
+      - Подъем груза краном на высоту $h$
+      - Разгон автомобиля на горизонтальном участке
+      - Падение тела с высоты $h$ без учета сопротивления воздуха
+      - Сжатие пружины
+      second:
+      - Работа силы тяжести (отрицательная), увеличение потенциальной энергии
+      - Работа силы тяги, увеличение кинетической энергии
+      - Превращение потенциальной энергии в кинетическую, закон сохранения
+      - Работа упругой силы, накопление потенциальной энергии упругой деформации
