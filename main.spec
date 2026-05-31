@@ -1,7 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 from PyInstaller.utils.hooks import collect_all
 
-datas = []
+datas = [('venv/Lib/site-packages/latex2mathml', 'latex2mathml')]
 binaries = []
 hiddenimports = []
 tmp_ret = collect_all('reportlab.graphics.barcode')

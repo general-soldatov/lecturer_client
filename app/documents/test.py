@@ -64,7 +64,7 @@ class ThermsTask:
         # Отключаем автоматический подбор, чтобы задать ширину вручную
         table.allow_autofit = False
 
-        PAGE_WIDTH = Inches(6.25)
+        PAGE_WIDTH = Cm(17.5)
         col_1_width = Inches(len(word) * 1/72 * self.font_size * coeff)
         for cell in table.columns[0].cells:
             cell.width = col_1_width
@@ -200,11 +200,11 @@ class TestQuestion:
         # Создаем основную таблицу для вопроса
         table = doc.add_table(rows=1, cols=1)
         table.style = 'Light Shading'
-        table.width = Cm(15.25)
+        table.width = Cm(18.1)
 
         # Настраиваем ячейку вопроса
         question_cell = table.cell(0, 0)
-        question_cell.width = Cm(15.25)
+        question_cell.width = Cm(18.1)
 
         # Добавляем текст вопроса
         question_para = question_cell.paragraphs[0]
@@ -318,7 +318,7 @@ class MatchingQuestion(TestQuestion):
         # Заголовок вопроса
         title_table = doc.add_table(rows=1, cols=1)
         title_table.style = 'Light Shading'
-        title_table.width = Cm(16)
+        title_table.width = Cm(17.5)
 
         title_cell = title_table.cell(0, 0)
         title_para = title_cell.paragraphs[0]
@@ -331,7 +331,7 @@ class MatchingQuestion(TestQuestion):
         matching_table = doc.add_table(rows=max(len(self.left_items), len(self.right_items)), cols=2)
         # matching_table.style = 'Light Shading'
         # matching_table.alignment = WD_TABLE_ALIGNMENT.CENTER
-        matching_table.width = Cm(16)
+        matching_table.width = Cm(17.5)
 
         # Заголовки таблицы
         # headers = ['№', 'Элемент 1', 'Элемент 2']
@@ -356,7 +356,7 @@ class MatchingQuestion(TestQuestion):
         # Добавляем строки для ответов
         answer_table = doc.add_table(rows=3, cols=len(self.left_items))
         answer_table.style = 'Table Grid'
-        answer_table.width = Cm(16)
+        answer_table.width = Cm(17.5)
 
         answer_cell = answer_table.rows[0].cells[0]
         self._apply_cell_formatting(answer_cell, "Ваши ответы:", font_size=11, bold=True)
@@ -397,7 +397,7 @@ class SortingQuestion(TestQuestion):
         table = doc.add_table(rows=2, cols=1)
         table.style = 'Light Shading'
         # table.alignment = WD_TABLE_ALIGNMENT.CENTER
-        table.width = Cm(16)
+        table.width = Cm(17.5)
 
         # Заголовок вопроса
         header_cell = table.cell(0, 0)
@@ -457,7 +457,7 @@ class NumberTask(TestQuestion):
         """Отрисовывает вопрос в документе"""
         table = doc.add_table(rows=2, cols=1)
         table.style = 'Light Shading'
-        table.width = Cm(16)
+        table.width = Cm(17.5)
 
         # Заголовок вопроса
         header_cell = table.cell(0, 0)
@@ -533,7 +533,7 @@ class TestGenerator:
         info_table = self.document.add_table(rows=2, cols=2)
         info_table.style = 'Table Grid'
         info_table.alignment = WD_TABLE_ALIGNMENT.CENTER
-        info_table.width = Cm(16)
+        info_table.width = Cm(17.5)
 
         info_data = [
             ("📋 Тип теста:", "Комплексное тестирование"),
